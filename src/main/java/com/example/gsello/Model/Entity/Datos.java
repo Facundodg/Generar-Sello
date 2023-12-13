@@ -1,4 +1,4 @@
-package com.example.Gsello.Model.Entity;
+package com.example.gsello.Model.Entity;
 
 
 import jakarta.persistence.*;
@@ -18,7 +18,7 @@ public class Datos {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idDatos;
     private String tasa;
-    private String subTasa;
+    private String subTipoTasa;
     private String padron;
     private double mtsCuadrados;
 

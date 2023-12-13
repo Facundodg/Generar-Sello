@@ -1,8 +1,8 @@
-package com.example.Gsello.Service.Impl;
+package com.example.gsello.Service.Impl;
 
-import com.example.Gsello.Model.Entity.Datos;
-import com.example.Gsello.Repocitori.DatoRepocitory;
-import com.example.Gsello.Service.Interfaz.DatoServicios;
+import com.example.gsello.Model.Entity.Datos;
+import com.example.gsello.Repocitori.DatoRepocitory;
+import com.example.gsello.Service.Interfaz.DatoServicios;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

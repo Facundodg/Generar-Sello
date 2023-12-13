@@ -1,4 +1,4 @@
-package com.example.Gsello.Service.Interfaz;
+package com.example.gsello.Service.Interfaz;
 
 import java.util.Collection;
 

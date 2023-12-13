@@ -1,8 +1,8 @@
-package com.example.Gsello.Controller.Impl;
+package com.example.gsello.Controller.Impl;
 
-import com.example.Gsello.Controller.Iterfaz.DatosApi;
-import com.example.Gsello.Model.Entity.Datos;
-import com.example.Gsello.Service.Interfaz.DatoServicios;
+import com.example.gsello.Controller.Iterfaz.DatosApi;
+import com.example.gsello.Model.Entity.Datos;
+import com.example.gsello.Service.Interfaz.DatoServicios;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

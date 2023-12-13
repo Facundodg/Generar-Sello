@@ -1,11 +1,10 @@
-package com.example.Gsello.Controller.Iterfaz;
+package com.example.gsello.Controller.Iterfaz;
 
-import com.example.Gsello.Model.Entity.Datos;
+import com.example.gsello.Model.Entity.Datos;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import org.hibernate.annotations.Parameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

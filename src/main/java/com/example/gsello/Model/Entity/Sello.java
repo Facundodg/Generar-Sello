@@ -1,4 +1,4 @@
-package com.example.Gsello.Model.Entity;
+package com.example.gsello.Model.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;

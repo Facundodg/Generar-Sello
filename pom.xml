@@ -71,6 +71,7 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<mainClass>com.example.gsello.GselloApplication</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>

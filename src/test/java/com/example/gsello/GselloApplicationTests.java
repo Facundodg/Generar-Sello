@@ -1,4 +1,4 @@
-package com.example.Gsello;
+package com.example.gsello;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
