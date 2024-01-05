@@ -23,7 +23,14 @@ public class SelloController implements SelloApi {
     @Override
     public ResponseEntity<SelloDTO> generateSello(DatosDTO datos) throws Exception {
         log.info("[SelloController - GenerarSello]");
+
+
+
         var auth =  SecurityContextHolder.getContext().getAuthentication();
+
+
+
+
         logger.info("Datos del Usuario: {}", auth.getPrincipal());
         logger.info("Datos de los Roles {}", auth.getAuthorities());
         logger.info("Esta autenticado {}", auth.isAuthenticated());

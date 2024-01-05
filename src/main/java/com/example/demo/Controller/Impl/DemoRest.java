@@ -73,7 +73,6 @@ public class DemoRest {
   }
 
 
-
   @PostMapping("/publico/authenticate")
   public ResponseEntity<TokenInfo> authenticate(@RequestBody AuthenticationReq authenticationReq) {
     logger.info("Autenticando al usuario {}", authenticationReq.getUsuario());
