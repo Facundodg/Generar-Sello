@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/generateSello")
+@RequestMapping("/sello")
 @Tag(name = "Sello", description = "Sello API")
 public interface SelloApi {
 
@@ -20,7 +20,7 @@ public interface SelloApi {
             consumes = {"application/json", "application/xml", "application/x-www-form-urlencoded"},
             produces = {"application/json", "application/vnd.api+json"})
     @ResponseStatus(HttpStatus.CREATED)
-    ResponseEntity<SelloDTO>generateSello(
+    ResponseEntity<String>generateSello(
             @NotNull
             @RequestBody @Valid final DatosDTO datos) throws Exception;
 

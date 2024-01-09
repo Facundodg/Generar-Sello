@@ -22,13 +22,10 @@ import java.util.Map;
 @RequestMapping
 public class DemoRest {
 
-
   @Autowired
   private AuthenticationManager authenticationManager;
-
   @Autowired
   UserDetailsService usuarioDetailsService;
-
   @Autowired
   private JwtUtilService jwtUtilService;
   private static final Logger logger = LoggerFactory.getLogger(DemoRest.class);
@@ -85,6 +82,15 @@ public class DemoRest {
         authenticationReq.getUsuario());
 
     final String jwt = jwtUtilService.generateToken(userDetails);
+
+    return ResponseEntity.ok(new TokenInfo(jwt));
+
+  }
+
+  @PostMapping("/publico/authenticate/sinToken")
+  public ResponseEntity<TokenInfo> authenticateSinToken(@RequestBody AuthenticationReq authenticationReq) {
+
+    final String jwt = jwtUtilService.generateTokenSinUser();
 
     return ResponseEntity.ok(new TokenInfo(jwt));
 

@@ -59,6 +59,8 @@ public class SelloServiceImpl implements SelloServicios {
     @Override
     public SelloDTO generarSello(DatosDTO datosDTO) {
 
+        /*
+
         Datos datos = datoServicios.getDatos(datosDTO);
         SelloDTO selloDTO = new SelloDTO();
 
@@ -71,6 +73,7 @@ public class SelloServiceImpl implements SelloServicios {
 
         }
 
+         */
         return null;
 
     }

@@ -15,14 +15,9 @@ import lombok.*;
 @AllArgsConstructor
 public class DatosDTO {
 
-    @NotNull(message = "tasa no debe ser nulo")
-    private String tasa;
-    @NotNull(message = "subTipoTasa no debe ser nulo")
-    private String subTipoTasa;
-    @NotNull(message = "padron no debe ser nulo")
-    private String padron;
-    @NotNull(message = "mtsCuadrados no debe ser nulo")
-    @Min(value = 1, message = "mtsCuadrados no debe ser negativo")
-    private double mtsCuadrados;
+    @NotNull(message = "El cuit no puede ser nulo")
+    private Long cuit;
+    @NotNull(message = "El id_tramite no puede ser nulo")
+    private Long id_tramite;
 
 }

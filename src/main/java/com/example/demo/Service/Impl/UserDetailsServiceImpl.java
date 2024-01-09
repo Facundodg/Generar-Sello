@@ -37,7 +37,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     );
 
     Usuario maria = new Usuario(
-        "mlopez",
+        "munidigital",
         password,
         Set.of("ADMIN")
     );

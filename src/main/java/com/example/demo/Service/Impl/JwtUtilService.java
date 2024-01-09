@@ -17,7 +17,7 @@ public class JwtUtilService {
   // LLAVE_MUY_SECRETA => [Base64] => TExBVkVfTVVZX1NFQ1JFVEE=
   private static final String JWT_SECRET_KEY = "TExBVkVfTVVZX1NFQ1JFVEE=";
 
-  public static final long JWT_TOKEN_VALIDITY = 1000 * 60 * 60 * (long) 8; // 8 Horas
+  public static final long JWT_TOKEN_VALIDITY = 1000 * 60 * 60 * (long) 1; // 1 Horas
 
   public String extractUsername(String token) {
     return extractClaim(token, Claims::getSubject);
@@ -39,14 +39,21 @@ public class JwtUtilService {
     return extractExpiration(token).before(new Date());
   }
 
+  public String generateTokenSinUser() {
+    Map<String, Object> claims = new HashMap<>();
+    claims.put("rol", "ROLE_ADMIN");
+    return createToken(claims, "munidigital");
+  }
+
   public String generateToken(UserDetails userDetails) {
     Map<String, Object> claims = new HashMap<>();
     // Agregando informacion adicional como "claim"
-    var rol = userDetails.getAuthorities().stream().collect(Collectors.toList()).get(0);
-    claims.put("rol", rol);
-    return createToken(claims, userDetails.getUsername());
+    // var rol = userDetails.getAuthorities().stream().collect(Collectors.toList()).get(0);
+    claims.put("rol", "ROLE_ADMIN");
+    //return createToken(claims, userDetails.getUsername());
+    return createToken(claims, "munidigital");
   }
-
+//        .setSubject(subject)
   private String createToken(Map<String, Object> claims, String subject) {
 
     return Jwts
@@ -61,6 +68,9 @@ public class JwtUtilService {
 
   public boolean validateToken(String token, UserDetails userDetails) {
     final String username = extractUsername(token);
+    System.out.println("username");
+    System.out.println(username);
+    System.out.println("username");
     return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
   }
 }

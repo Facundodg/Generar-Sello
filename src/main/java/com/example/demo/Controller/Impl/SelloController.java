@@ -20,21 +20,25 @@ public class SelloController implements SelloApi {
     private final SelloServicios selloServicios;
     private static final Logger logger = LoggerFactory.getLogger(DemoRest.class);
 
+    //este es el endpoint que vamos a cambiar para que reciba y devuelva los siguientes datos
+
+
+    //public ResponseEntity<SelloDTO> generateSello(DatosDTO datos) throws Exception
     @Override
-    public ResponseEntity<SelloDTO> generateSello(DatosDTO datos) throws Exception {
+    public ResponseEntity<String> generateSello(DatosDTO datos) throws Exception {
         log.info("[SelloController - GenerarSello]");
-
-
+        logger.info("Datos del CUIT: {}", datos.getCuit());
+        logger.info("Datos del id_tramite: {}", datos.getId_tramite());
 
         var auth =  SecurityContextHolder.getContext().getAuthentication();
-
-
-
 
         logger.info("Datos del Usuario: {}", auth.getPrincipal());
         logger.info("Datos de los Roles {}", auth.getAuthorities());
         logger.info("Esta autenticado {}", auth.isAuthenticated());
-        return ResponseEntity.ok(selloServicios.generarSello(datos));
+
+        return ResponseEntity.ok("selloServicios.generarSello(datos)");
+
+        //return ResponseEntity.ok(selloServicios.generarSello(datos));
     }
 
 }

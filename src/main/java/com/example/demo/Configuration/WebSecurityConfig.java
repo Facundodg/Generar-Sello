@@ -30,6 +30,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/publico/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/sello/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .cors(withDefaults())
