@@ -15,7 +15,9 @@ import java.util.stream.Collectors;
 @Service
 public class JwtUtilService {
   // LLAVE_MUY_SECRETA => [Base64] => TExBVkVfTVVZX1NFQ1JFVEE=
-  private static final String JWT_SECRET_KEY = "TExBVkVfTVVZX1NFQ1JFVEE=";
+  //TExBVkVfTVVZX1NFQ1JFVEE=
+
+  private static final String JWT_SECRET_KEY = "TExBVkVfTVVZX1NFQ1JFVEE=FSDS34234";
 
   public static final long JWT_TOKEN_VALIDITY = 1000 * 60 * 60 * (long) 1; // 1 Horas
 
@@ -68,9 +70,6 @@ public class JwtUtilService {
 
   public boolean validateToken(String token, UserDetails userDetails) {
     final String username = extractUsername(token);
-    System.out.println("username");
-    System.out.println(username);
-    System.out.println("username");
     return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
   }
 }

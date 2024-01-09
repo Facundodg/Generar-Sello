@@ -21,9 +21,13 @@ public class HabConceptoTarif {
 
     private Long id_categoria;
     private Long cant_urbanos;
-    private LocalDateTime fechaCreacion;
+    private LocalDateTime fecha;
 
     // Opcionalmente, puedes tener una relación bidireccional con HabTramiteConcepto
     @OneToMany(mappedBy = "conceptoTarif")
     private Set<HabTramiteConcepto> tramiteConceptos = new HashSet<>();
+
+    @OneToOne(mappedBy = "habConceptoTarif", cascade = CascadeType.ALL)
+    private Categoria categoria;
+
 }
