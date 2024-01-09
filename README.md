@@ -46,3 +46,28 @@ CREATE TABLE hab_tramite_tarif(
     descripcion character varying(255),
     fecha timestamp without time zone
 );
+
+CONSULTAS PARA POSTMAN:
+
+CONSULTA HOLA ADMIN:
+GET
+http://localhost:5050/admin 
+Bearer Token
+
+CONSULTA HOLA ADMIN:
+POST
+http://localhost:5050/publico/authenticate 
+{
+  
+  "usuario":"munidigital",
+  "clave":"secreto"
+
+}
+CONSULTA PARA GENERAR TOKEN SIN LOGUEO:
+POST
+http://localhost:5050/publico/authenticate/sinToken
+
+CONSULTA PARA GENERAR SELLO:
+POST
+http://localhost:5050/sello
+Bearer Token
