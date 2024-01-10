@@ -19,5 +19,9 @@ public class DatosDTO {
     private Long cuit;
     @NotNull(message = "El id_tramite no puede ser nulo")
     private Long id_tramite;
+    @NotNull(message = "Los Mt2 no pueden ser nulos")
+    private double mt2;
+    @NotNull(message = "El padron no puede ser nulo")
+    private Long padron;
 
 }

@@ -12,10 +12,17 @@ import lombok.*;
 @AllArgsConstructor
 public class SelloDTO {
 
-    @NotNull(message = "ID no debe ser nulo")
-    private Long id_sello;
     @NotNull(message = "Importe no debe ser nulo")
     @Min(value = 1, message = "Importe no debe ser negativo")
-    private double importe;
+    private double inspeccion;
+    @NotNull(message = "Importe no debe ser nulo")
+    @Min(value = 1, message = "Importe no debe ser negativo")
+    private double tasaAdministrativa;
+    @NotNull(message = "Importe no debe ser nulo")
+    @Min(value = 1, message = "Importe no debe ser negativo")
+    private double factibilidad;
+    @NotNull(message = "Importe no debe ser nulo")
+    @Min(value = 1, message = "Importe no debe ser negativo")
+    private double importeTotal;
 
 }

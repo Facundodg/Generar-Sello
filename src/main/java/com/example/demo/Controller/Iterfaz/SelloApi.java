@@ -20,7 +20,7 @@ public interface SelloApi {
             consumes = {"application/json", "application/xml", "application/x-www-form-urlencoded"},
             produces = {"application/json", "application/vnd.api+json"})
     @ResponseStatus(HttpStatus.CREATED)
-    ResponseEntity<String>generateSello(
+    ResponseEntity<SelloDTO>generateSello(
             @NotNull
             @RequestBody @Valid final DatosDTO datos) throws Exception;
 

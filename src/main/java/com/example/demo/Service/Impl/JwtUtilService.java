@@ -17,7 +17,7 @@ public class JwtUtilService {
   // LLAVE_MUY_SECRETA => [Base64] => TExBVkVfTVVZX1NFQ1JFVEE=
   //TExBVkVfTVVZX1NFQ1JFVEE=
 
-  private static final String JWT_SECRET_KEY = "TExBVkVfTVVZX1NFQ1JFVEE=FSDS34234";
+  private static final String JWT_SECRET_KEY = "TExBVkVfTVVZX1NFQ1JFVEE=";
 
   public static final long JWT_TOKEN_VALIDITY = 1000 * 60 * 60 * (long) 1; // 1 Horas
 

@@ -25,7 +25,8 @@ public class SelloController implements SelloApi {
 
     //public ResponseEntity<SelloDTO> generateSello(DatosDTO datos) throws Exception
     @Override
-    public ResponseEntity<String> generateSello(DatosDTO datos) throws Exception {
+    public ResponseEntity<SelloDTO> generateSello(DatosDTO datos) throws Exception {
+
         log.info("[SelloController - GenerarSello]");
         logger.info("Datos del CUIT: {}", datos.getCuit());
         logger.info("Datos del id_tramite: {}", datos.getId_tramite());
@@ -36,7 +37,7 @@ public class SelloController implements SelloApi {
         logger.info("Datos de los Roles {}", auth.getAuthorities());
         logger.info("Esta autenticado {}", auth.isAuthenticated());
 
-        return ResponseEntity.ok("selloServicios.generarSello(datos)");
+        return ResponseEntity.ok(selloServicios.generarSello(datos));
 
         //return ResponseEntity.ok(selloServicios.generarSello(datos));
     }
