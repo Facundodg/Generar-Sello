@@ -1,5 +1,7 @@
 -- Adminer 4.8.1 PostgreSQL 15.2 (Debian 15.2-1.pgdg110+1) dump
 
+\connect "ms_habilitacion";
+
 DROP TABLE IF EXISTS "categoria";
 DROP SEQUENCE IF EXISTS categoria_id_seq;
 CREATE SEQUENCE categoria_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
@@ -99,4 +101,4 @@ ALTER TABLE ONLY "public"."hab_concepto_tarif" ADD CONSTRAINT "hab_concepto_tari
 ALTER TABLE ONLY "public"."hab_tramite_concepto" ADD CONSTRAINT "fkab6u320eqkrbb6jjnwi72a0vn" FOREIGN KEY (id_concepto_tarif) REFERENCES hab_concepto_tarif(id) NOT DEFERRABLE;
 ALTER TABLE ONLY "public"."hab_tramite_concepto" ADD CONSTRAINT "fkcd4qaic21wsbecr4xeeov0pnd" FOREIGN KEY (id_tramite_tarif) REFERENCES hab_tramite_tarif(id) NOT DEFERRABLE;
 
--- 2024-01-10 03:53:26.300318+00
+-- 2024-01-10 11:26:25.2143+00

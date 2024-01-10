@@ -81,9 +81,11 @@ public class SelloServiceImpl implements SelloServicios {
             System.out.println(selloBajaDTO.getCantidad_urbanos());
             System.out.println(selloBajaDTO.getCosto());
 
-            selloDTO.setFactibilidad(200.0);
-            selloDTO.setInspeccion(200.0);
-            selloDTO.setTasaAdministrativa(200.0);
+            selloDTO.setFactibilidad(9350.0);
+            selloDTO.setInspeccion(2550.0);
+            selloDTO.setTasaAdministrativa(255.0);
+            selloDTO.setCategoria(selloBajaDTO.getCantidad_urbanos()*selloBajaDTO.getCosto());
+            selloDTO.setTipoCategoria(selloBajaDTO.getTipo_categoria());
             selloDTO.setImporteTotal(selloBajaDTO.getCantidad_urbanos()*selloBajaDTO.getCosto()
             + selloDTO.getFactibilidad() + selloDTO.getTasaAdministrativa() + selloDTO.getInspeccion());
 
