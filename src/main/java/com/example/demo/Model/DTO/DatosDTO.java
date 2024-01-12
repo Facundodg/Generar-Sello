@@ -16,7 +16,7 @@ import lombok.*;
 public class DatosDTO {
 
     @NotNull(message = "El cuit no puede ser nulo")
-    private Long cuit;
+    private String cuit;
     @NotNull(message = "El id_tramite no puede ser nulo")
     private Long id_tramite;
     @NotNull(message = "Los Mt2 no pueden ser nulos")
