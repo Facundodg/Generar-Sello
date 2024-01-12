@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/sello")
+@RequestMapping("/vep")
 @Tag(name = "Sello", description = "Sello API")
 public interface SelloApi {
 
