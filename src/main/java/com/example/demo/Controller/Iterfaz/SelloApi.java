@@ -1,6 +1,7 @@
 package com.example.demo.Controller.Iterfaz;
 
 import com.example.demo.Model.DTO.DatosDTO;
+import com.example.demo.Model.DTO.ResponceDTO;
 import com.example.demo.Model.DTO.SelloDTO;
 import com.example.demo.Model.Entity.Datos;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,9 +10,11 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-@RequestMapping("/vep")
+@Validated
+@RequestMapping("/sello")
 @Tag(name = "Sello", description = "Sello API")
 public interface SelloApi {
 
@@ -20,8 +23,8 @@ public interface SelloApi {
             consumes = {"application/json", "application/xml", "application/x-www-form-urlencoded"},
             produces = {"application/json", "application/vnd.api+json"})
     @ResponseStatus(HttpStatus.CREATED)
-    ResponseEntity<SelloDTO>generateSello(
+    ResponseEntity<ResponceDTO>generateSello(
             @NotNull
-            @RequestBody @Valid final DatosDTO datos) throws Exception;
+            @RequestBody @Valid final DatosDTO datos, BindingResult bi);
 
 }

@@ -1,11 +1,6 @@
 package com.example.demo.Service.Impl;
 
-import com.example.demo.Commons.FileUploadAdvice;
-import com.example.demo.Commons.UsuarioNoEncontradoException;
-import com.example.demo.Model.DTO.Concepto;
-import com.example.demo.Model.DTO.DatosDTO;
-import com.example.demo.Model.DTO.SelloBajaDTO;
-import com.example.demo.Model.DTO.SelloDTO;
+import com.example.demo.Model.DTO.*;
 import com.example.demo.Model.Entity.Sello;
 import com.example.demo.Model.Entity.Usuario;
 import com.example.demo.Repocitori.SelloRepocitory;
@@ -18,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.FileSystemAlreadyExistsException;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -71,15 +65,15 @@ public class SelloServiceImpl implements SelloServicios {
     }
 
     @Override
-    public SelloDTO generarSello(DatosDTO datosDTO) {
-
+    public ResponceDTO generarSello(DatosDTO datosDTO) {
+        
         try {
 
-        Optional<Usuario> optionalUsuario  = Optional.ofNullable(usuarioRepocitory.findAllByCuit(datosDTO.getCuit()));
+        //Optional<Usuario> optionalUsuario  = Optional.ofNullable(usuarioRepocitory.findAllByCuit(datosDTO.getCuit()));
 
-        Usuario usuario = optionalUsuario.orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no empadronado"));
+        Usuario usuario = usuarioRepocitory.findAllByCuit(datosDTO.getCuit());
 
-        log.info("[Usuario - {}]", usuario.getCategoria());
+        //Usuario usuario = optionalUsuario.orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no empadronado"));
 
             if (usuario != null) {
 
@@ -96,6 +90,9 @@ public class SelloServiceImpl implements SelloServicios {
                 SelloBajaDTO selloBajaDTO = new SelloBajaDTO(id_tramite, descripcion, cantidad_urbanos, tipo_categoria, costo);
 
                 SelloDTO selloDTO = new SelloDTO();
+
+                //selloDTO.builder().
+
                 Concepto conceptoDTO = new Concepto(9350.0, 9350.0, 255.0, selloBajaDTO.getCantidad_urbanos() * selloBajaDTO.getCosto());
 
                 selloDTO.setTipoCategoria(selloBajaDTO.getTipo_categoria());
@@ -106,24 +103,28 @@ public class SelloServiceImpl implements SelloServicios {
                 selloDTO.setId_tramite(id_tramite);
                 selloDTO.setCuit(datosDTO.getCuit());
 
-                // Devuelve el SelloBajaDTO u otro valor según tu lógica
-                return selloDTO;
+                ResponceDTO responce = new ResponceDTO("ok",selloDTO,"200 OK","","");
+
+                return responce;
 
             } else {
-                // Manejo de caso donde la lista está vacía
-                return null;
+                ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","fail build sello");
+                return responce;
             }
 
         }else{
 
-            return null;
+            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","No user found related to a category");
+            return responce;
 
         }
 
         } catch (Exception e) {
-            // Manejo de la excepción
-            e.printStackTrace(); // O utiliza un logger para manejar la excepción de una manera más adecuada
-            return null; // O lanza otra excepción, según tus necesidades
+
+            e.printStackTrace();
+            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","Algo fallo.");
+            return responce;
+
         }
 
     }
