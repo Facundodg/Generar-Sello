@@ -30,7 +30,7 @@ public class DatosDTO {
     @NotNull(message = "Los Mt2 no pueden ser nulos")
     private double mt2;
     @NotNull(message = "El padron no puede ser nulo")
-    @Size(min = 13, max = 13, message = "El padron tiene que tener 13 caracteres")
+    @Size(min = 6, max = 6, message = "El padron tiene que tener 6 caracteres")
     @NotBlank
     private String padron;
 
