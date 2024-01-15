@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -72,6 +73,8 @@ public class SelloServiceImpl implements SelloServicios {
         //Optional<Usuario> optionalUsuario  = Optional.ofNullable(usuarioRepocitory.findAllByCuit(datosDTO.getCuit()));
 
         Usuario usuario = usuarioRepocitory.findAllByCuit(datosDTO.getCuit());
+
+//
 
         //Usuario usuario = optionalUsuario.orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no empadronado"));
 

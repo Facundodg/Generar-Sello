@@ -18,5 +18,7 @@ public class Usuario {
 
     private String cuit;
     private String categoria;
+    private boolean tem;
+    private boolean cisi;
 
 }
