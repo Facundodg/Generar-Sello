@@ -173,8 +173,8 @@ agent any
 
         environment{
              PUERTO_INTERNO = 5050
-             NOMBRE_CONTENEDOR = "api_abilitacion"
-             IDENTIFICADOR_IMAGEN = "api_abilitacion"
+             NOMBRE_CONTENEDOR = "api_habilitacion"
+             IDENTIFICADOR_IMAGEN = "api_habilitacion"
          }
 
         steps {
