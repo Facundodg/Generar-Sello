@@ -14,7 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 @Validated
-@RequestMapping("/sello")
+@RequestMapping("/vep")
 @Tag(name = "Sello", description = "Sello API")
 public interface SelloApi {
 
