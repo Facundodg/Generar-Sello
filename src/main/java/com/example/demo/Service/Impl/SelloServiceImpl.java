@@ -75,20 +75,50 @@ public class SelloServiceImpl implements SelloServicios {
         Usuario usuario = usuarioRepocitory.findAllByCuit(datosDTO.getCuit());
 
 //
-
         //Usuario usuario = optionalUsuario.orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no empadronado"));
 
             if (usuario != null) {
 
-            Object[] resultado = selloRepocitory.obtenerDatosPorId(datosDTO.getId_tramite()).stream().findFirst().orElse(null);
+            //Object[] resultado = selloRepocitory.obtenerTramite(datosDTO.getId_tramite()).stream().findFirst().orElse(null);
 
-            if (resultado != null) {
+                /*
+
+                for (Object elemento : resultado) {
+                    // Realizar alguna acción con cada elemento (por ejemplo, imprimirlo)
+                    System.out.println(elemento);
+                }
+
+                 */
+
+                //System.out.println(resultado);
+
+                /*
+                Long id_tramite2 = (Long) resultado[0];
+                Long cant_urbanos = (Long) resultado[1];
+                String tipoConcepto = (String) resultado[2];
+                double costo2 = (double) resultado[3];
+                */
+
+                int p = 1;
+
+                if (p == 1) {
+
+                /*
 
                 Long id_tramite = (Long) resultado[0];
                 String descripcion = (String) resultado[1];
                 Long cantidad_urbanos = (Long) resultado[2];
                 String tipo_categoria = (String) resultado[3];
                 double costo = (double) resultado[4];
+
+
+                 */
+
+                    Long id_tramite = 1L;
+                    String descripcion = "(String) resultado[1]";
+                    Long cantidad_urbanos = 228L;
+                    String tipo_categoria = "A";
+                    double costo = 17;
 
                 SelloBajaDTO selloBajaDTO = new SelloBajaDTO(id_tramite, descripcion, cantidad_urbanos, tipo_categoria, costo);
 
