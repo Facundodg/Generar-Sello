@@ -70,25 +70,39 @@ public class SelloServiceImpl implements SelloServicios {
         
         try {
 
-        //Optional<Usuario> optionalUsuario  = Optional.ofNullable(usuarioRepocitory.findAllByCuit(datosDTO.getCuit()));
+        Optional<Usuario> optionalUsuario  = Optional.ofNullable(usuarioRepocitory.findAllByCuit(datosDTO.getCuit()));
 
         Usuario usuario = usuarioRepocitory.findAllByCuit(datosDTO.getCuit());
 
-//
         //Usuario usuario = optionalUsuario.orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no empadronado"));
 
             if (usuario != null) {
 
-            //Object[] resultado = selloRepocitory.obtenerTramite(datosDTO.getId_tramite()).stream().findFirst().orElse(null);
-
                 /*
+            Object[] resultado = selloRepocitory.obtenerTramite(datosDTO.getId_tramite()).stream().findFirst().orElse(null);
+
 
                 for (Object elemento : resultado) {
+
                     // Realizar alguna acción con cada elemento (por ejemplo, imprimirlo)
                     System.out.println(elemento);
                 }
 
-                 */
+                */
+
+                List<Object[]> resultados = selloRepocitory.obtenerTramite(datosDTO.getId_tramite());
+
+                for (Object[] resultado : resultados) {
+
+                    for (Object elemento : resultado) {
+
+                        System.out.println(elemento);
+
+                    }
+
+                }
+
+
 
                 //System.out.println(resultado);
 
