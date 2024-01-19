@@ -26,7 +26,7 @@ public class SelloDTO {
     @Min(value = 1, message = "Importe no debe ser negativo")
     private double importeTotal;
 
-    private Concepto conceptoDTO;
+    private Object conceptoDTO;
 
 
 }

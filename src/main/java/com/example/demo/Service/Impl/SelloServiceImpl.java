@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -67,17 +68,146 @@ public class SelloServiceImpl implements SelloServicios {
 
     @Override
     public ResponceDTO generarSello(DatosDTO datosDTO) {
-        
-        try {
 
-        Optional<Usuario> optionalUsuario  = Optional.ofNullable(usuarioRepocitory.findAllByCuit(datosDTO.getCuit()));
+    try{
 
-        Usuario usuario = usuarioRepocitory.findAllByCuit(datosDTO.getCuit());
+        if(datosDTO.getId_tramite() == 1){
 
-        //Usuario usuario = optionalUsuario.orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no empadronado"));
+            Usuario usuario = usuarioRepocitory.findAllByCuit(datosDTO.getCuit());
 
-            if (usuario != null) {
+            if(usuario != null){
 
+                ResponceDTO responce = tramite1(datosDTO.getId_tramite(),usuario.getCategoria(),usuario.getCuit());
+                return responce;
+
+            }else{
+
+                ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","No user found related to a category");
+                return responce;
+
+            }
+
+        } else if (datosDTO.getId_tramite() == 2) {
+
+            Usuario usuario = usuarioRepocitory.findAllByCuit(datosDTO.getCuit());
+
+            if(usuario != null){
+
+                ResponceDTO responce = tramite2(datosDTO.getId_tramite(),usuario.getCategoria(),usuario.getCuit());
+                return responce;
+
+            }else{
+
+                ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","No user found related to a category");
+                return responce;
+
+            }
+
+        }else{
+
+            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","id_tramite no encontrado");
+            return responce;
+
+        }
+
+    } catch (Exception e) {
+
+            e.printStackTrace();
+            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","Algo fallo.");
+            return responce;
+
+    }
+
+    }
+
+    public ResponceDTO tramite1(long id_tramite,String categoria,String cuit){
+
+        List<Object> objetosAlmacenados = new ArrayList<>();
+
+        List<Object[]> resultados = selloRepocitory.obtenerTramite(id_tramite, categoria);
+
+        if (resultados != null) {
+
+            for (Object[] resultado : resultados) {
+                for (Object elemento : resultado) {
+                    objetosAlmacenados.add(elemento);
+                }
+            }
+
+            Long cant_urbanos_inspeccion = Long.parseLong(objetosAlmacenados.get(1).toString());
+            Long cant_urbanos_tasaAdministrativa = Long.parseLong(objetosAlmacenados.get(5).toString());
+            Long cant_urbanos_factibilidad = Long.parseLong(objetosAlmacenados.get(9).toString());
+            Long cant_urbanos_categoria = Long.parseLong(objetosAlmacenados.get(13).toString());
+            double costo = (double) objetosAlmacenados.get(3);
+
+            Concepto conceptoDTO = Concepto.builder()
+                    .inspeccion(cant_urbanos_inspeccion*costo)
+                    .tasaAdministrativa(cant_urbanos_tasaAdministrativa*costo)
+                    .factibilidad(cant_urbanos_factibilidad*costo)
+                    .categoria(cant_urbanos_categoria*costo)
+                    .build();
+
+            SelloDTO selloDTO = SelloDTO.builder()
+                    .tipoCategoria(categoria)
+                    .importeTotal(conceptoDTO.getCategoria() + conceptoDTO.getFactibilidad() + conceptoDTO.getTasaAdministrativa() + conceptoDTO.getInspeccion())
+                    .conceptoDTO(conceptoDTO)
+                    .id_tramite(id_tramite)
+                    .cuit(cuit)
+                    .build();
+
+            ResponceDTO responce = new ResponceDTO("ok",selloDTO,"200 OK","","");
+
+            return responce;
+
+        } else {
+            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","fail build sello");
+            return responce;
+        }
+
+    }
+
+    public ResponceDTO tramite2(long id_tramite,String categoria,String cuit){
+
+        List<Object> objetosAlmacenados = new ArrayList<>();
+
+        List<Object[]> resultados = selloRepocitory.obtenerTramite(id_tramite, categoria);
+
+        if (resultados != null) {
+
+            for (Object[] resultado : resultados) {
+                for (Object elemento : resultado) {
+                    objetosAlmacenados.add(elemento);
+                }
+            }
+
+            Long cant_urbanos_reinspeccion = Long.parseLong(objetosAlmacenados.get(1).toString());
+            String categoria_reinspeccion= objetosAlmacenados.get(6).toString();
+            double costo = (double) objetosAlmacenados.get(3);
+
+            ConceptoReinspeccion conceptoReinspeccion = ConceptoReinspeccion.builder()
+                    .inspeccion(cant_urbanos_reinspeccion*costo)
+                    .build();
+
+            SelloDTO selloDTO = SelloDTO.builder()
+                    .tipoCategoria(categoria)
+                    .importeTotal(conceptoReinspeccion.getInspeccion())
+                    .conceptoDTO(conceptoReinspeccion)
+                    .id_tramite(id_tramite)
+                    .cuit(cuit)
+                    .build();
+
+            ResponceDTO responce = new ResponceDTO("ok",selloDTO,"200 OK","","");
+
+            return responce;
+
+        } else {
+            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","fail build sello");
+            return responce;
+        }
+
+    }
+
+}
                 /*
             Object[] resultado = selloRepocitory.obtenerTramite(datosDTO.getId_tramite()).stream().findFirst().orElse(null);
 
@@ -88,91 +218,8 @@ public class SelloServiceImpl implements SelloServicios {
                     System.out.println(elemento);
                 }
 
+            System.out.println(objetosAlmacenados.get(12).toString());
+            System.out.println(objetosAlmacenados.get(13).toString());
+            System.out.println(objetosAlmacenados.get(14).toString());
+            System.out.println(objetosAlmacenados.get(15).toString());
                 */
-
-                List<Object[]> resultados = selloRepocitory.obtenerTramite(datosDTO.getId_tramite());
-
-                for (Object[] resultado : resultados) {
-
-                    for (Object elemento : resultado) {
-
-                        System.out.println(elemento);
-
-                    }
-
-                }
-
-
-
-                //System.out.println(resultado);
-
-                /*
-                Long id_tramite2 = (Long) resultado[0];
-                Long cant_urbanos = (Long) resultado[1];
-                String tipoConcepto = (String) resultado[2];
-                double costo2 = (double) resultado[3];
-                */
-
-                int p = 1;
-
-                if (p == 1) {
-
-                /*
-
-                Long id_tramite = (Long) resultado[0];
-                String descripcion = (String) resultado[1];
-                Long cantidad_urbanos = (Long) resultado[2];
-                String tipo_categoria = (String) resultado[3];
-                double costo = (double) resultado[4];
-
-
-                 */
-
-                    Long id_tramite = 1L;
-                    String descripcion = "(String) resultado[1]";
-                    Long cantidad_urbanos = 228L;
-                    String tipo_categoria = "A";
-                    double costo = 17;
-
-                SelloBajaDTO selloBajaDTO = new SelloBajaDTO(id_tramite, descripcion, cantidad_urbanos, tipo_categoria, costo);
-
-                SelloDTO selloDTO = new SelloDTO();
-
-                //selloDTO.builder().
-
-                Concepto conceptoDTO = new Concepto(9350.0, 9350.0, 255.0, selloBajaDTO.getCantidad_urbanos() * selloBajaDTO.getCosto());
-
-                selloDTO.setTipoCategoria(selloBajaDTO.getTipo_categoria());
-                selloDTO.setImporteTotal(selloBajaDTO.getCantidad_urbanos() * selloBajaDTO.getCosto()
-                        + conceptoDTO.getFactibilidad() + conceptoDTO.getTasaAdministrativa() + conceptoDTO.getInspeccion());
-                selloDTO.setConceptoDTO(conceptoDTO);
-
-                selloDTO.setId_tramite(id_tramite);
-                selloDTO.setCuit(datosDTO.getCuit());
-
-                ResponceDTO responce = new ResponceDTO("ok",selloDTO,"200 OK","","");
-
-                return responce;
-
-            } else {
-                ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","fail build sello");
-                return responce;
-            }
-
-        }else{
-
-            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","No user found related to a category");
-            return responce;
-
-        }
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","Algo fallo.");
-            return responce;
-
-        }
-
-    }
-}
