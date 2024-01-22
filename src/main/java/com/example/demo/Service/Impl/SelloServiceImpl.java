@@ -221,5 +221,6 @@ public class SelloServiceImpl implements SelloServicios {
             System.out.println(objetosAlmacenados.get(12).toString());
             System.out.println(objetosAlmacenados.get(13).toString());
             System.out.println(objetosAlmacenados.get(14).toString());
+
             System.out.println(objetosAlmacenados.get(15).toString());
                 */
