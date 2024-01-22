@@ -190,6 +190,8 @@ agent any
 
                     //ssh desarrollo@172.20.255.15 'cd /home/desarrollo/deploy && docker-compose up -d'
                     ssh 'cd /home/desarrollo/deploy && docker-compose up -d'
+                    
+                    ssh 'docker network connect estaciones_my-habilitacion ${IDENTIFICADOR_IMAGEN}'
 
                     //sh "docker run --network estaciones_my-habilitacion -d -p ${PUERTO_EXTERNO}:${PUERTO_INTERNO} --name ${NOMBRE_CONTENEDOR} ${IDENTIFICADOR_IMAGEN}"
 
