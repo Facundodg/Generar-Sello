@@ -188,7 +188,9 @@ agent any
 
                     sh "docker build -t ${IDENTIFICADOR_IMAGEN} ."
 
-                    sh "docker run --network estaciones_my-habilitacion -d -p ${PUERTO_EXTERNO}:${PUERTO_INTERNO} --name ${NOMBRE_CONTENEDOR} ${IDENTIFICADOR_IMAGEN}"
+                    ssh desarrollo@172.20.255.15 'cd ~/home/desarrollo/deploy && docker-compose up -d'
+
+                    //sh "docker run --network estaciones_my-habilitacion -d -p ${PUERTO_EXTERNO}:${PUERTO_INTERNO} --name ${NOMBRE_CONTENEDOR} ${IDENTIFICADOR_IMAGEN}"
 
 
 
