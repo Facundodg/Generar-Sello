@@ -193,6 +193,10 @@ agent any
 
                     //ssh desarrollo@172.20.255.15 'cd /home/desarrollo/deploy && docker-compose up -d'
                     //ssh desarrollo@172.20.255.15 'cd /home/desarrollo/deploy && docker-compose up -d'
+
+                    sshagent (credentials: ['deploy-dev']) {
+                    sh 'ssh desarrollo@172.20.255.15 && cd /home/desarrollo/deploy && docker-compose up -d'
+                    }
                     
                     sh 'docker network connect estaciones_my-habilitacion ${IDENTIFICADOR_IMAGEN}'
 
