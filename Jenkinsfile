@@ -197,14 +197,13 @@ agent any
 
                     sh 'cat ~/.ssh/known_hosts'
 
-                    sshagent(credentials: ['$SSH_CREDENTIALS']) {
-                      sh '''
-                      
-                          ssh -o StrictHostKeyChecking=no desarrollo@172.20.255.15 && cd /home/desarrollo/deploy && docker-compose up -d
-
-                      '''
+                    sshagent(credentials: [SSH_CREDENTIALS]) {
+                        // Ejecuta el comando SSH dentro del bloque sshagent
+                        sh '''
+                            ssh -o StrictHostKeyChecking=no desarrollo@172.20.255.15 "cd /home/desarrollo/deploy && docker-compose up -d"
+                        '''
                     }
-                    
+                            
                     sh 'docker network connect estaciones_my-habilitacion ${IDENTIFICADOR_IMAGEN}'
 
 
