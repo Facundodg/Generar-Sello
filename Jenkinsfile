@@ -173,8 +173,8 @@ agent any
 
         environment{
              PUERTO_INTERNO = 5050
-             NOMBRE_CONTENEDOR = "api_habilitacion"
-             IDENTIFICADOR_IMAGEN = "api_habilitacion"
+             NOMBRE_CONTENEDOR = "habilitacion_api_docker_compose"
+             IDENTIFICADOR_IMAGEN = "habilitacion_api_docker_compose"
          }
 
         steps {
