@@ -175,6 +175,7 @@ agent any
              PUERTO_INTERNO = 5050
              NOMBRE_CONTENEDOR = "habilitacion_api_docker_compose"
              IDENTIFICADOR_IMAGEN = "habilitacion_api_docker_compose"
+             SSH_CREDENTIALS = 'Desarrollo (Key ssh)'
          }
 
         steps {
@@ -194,7 +195,9 @@ agent any
                     //ssh desarrollo@172.20.255.15 'cd /home/desarrollo/deploy && docker-compose up -d'
                     //ssh desarrollo@172.20.255.15 'cd /home/desarrollo/deploy && docker-compose up -d'
 
-                    sshagent (credentials: ['deploy-dev']) {
+                    sh 'cat ~/.ssh/known_hosts'
+
+                    sshagent (credentials: ['SSH_CREDENTIALS']) {
                     sh 'ssh -o StrictHostKeyChecking=no desarrollo@172.20.255.15 && cd /home/desarrollo/deploy && docker-compose up -d'
                     }
                     
