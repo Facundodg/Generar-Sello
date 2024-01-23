@@ -186,12 +186,43 @@ agent any
                         error "Dockerfile not found"
                     }
 
+
+                    //---------ZONA DE PRUEBAS JENKINS----------
+
                     sh "docker build -t ${IDENTIFICADOR_IMAGEN} ."
 
                     //ssh desarrollo@172.20.255.15 'cd /home/desarrollo/deploy && docker-compose up -d'
-                    ssh desarrollo@172.20.255.15 'cd /home/desarrollo/deploy && docker-compose up -d'
+                    //ssh desarrollo@172.20.255.15 'cd /home/desarrollo/deploy && docker-compose up -d'
                     
                     sh 'docker network connect estaciones_my-habilitacion ${IDENTIFICADOR_IMAGEN}'
+
+                    sshagent (credentials: ['deploy-dev']) {
+                    sh 'ssh desarrollo@172.20.255.15 && cd /home/desarrollo/deploy && docker-compose up -d'
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+
+
+                    
 
                     //sh "docker run --network estaciones_my-habilitacion -d -p ${PUERTO_EXTERNO}:${PUERTO_INTERNO} --name ${NOMBRE_CONTENEDOR} ${IDENTIFICADOR_IMAGEN}"
 
