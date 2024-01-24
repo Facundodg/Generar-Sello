@@ -71,3 +71,36 @@ CONSULTA PARA GENERAR SELLO:
 POST
 http://localhost:5050/sello
 Bearer Token
+
+
+
+
+
+
+# Configuración para SQL Server
+#spring.datasource.sqlserver.url=jdbc:sqlserver://172.20.255.15:1433;databaseName=Express
+#spring.datasource.sqlserver.username=root
+#spring.datasource.sqlserver.password=root
+#Espring.datasource.sqlserver.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+
+#produccion
+#spring.datasource.url=jdbc:postgresql://${BASE_DATOS_URL:172.20.255.15}:9005/ms_habilitacion
+
+#localhost
+#spring.datasource.url=jdbc:postgresql://localhost:9005/ms_habilitacion
+
+#dimsmt.gob.ar
+#spring.datasource.url=jdbc:postgresql://dimsmt.gob.ar:5050/ms_habilitacion
+
+#servidor 15
+#spring.datasource.url=jdbc:postgresql://172.20.255.15:9005/ms_habilitacion
+
+#spring.datasource.username=root
+
+# Configuración para SQL Server
+#spring.datasource.sqlserver.url=jdbc:sqlserver://172.20.254.236:1433;databaseName=PROGRAM
+#spring.datasource.sqlserver.username=prueba
+#spring.datasource.sqlserver.password=prueba
+#spring.datasource.sqlserver.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
+

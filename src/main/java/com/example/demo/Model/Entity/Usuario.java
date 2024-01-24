@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "usuario", schema = "habilitacion")
 public class Usuario {
 
     @Id

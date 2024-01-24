@@ -82,7 +82,7 @@ public class SelloServiceImpl implements SelloServicios {
 
             }else{
 
-                ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","No user found related to a category");
+                ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","El usuario no fue empadronado antes.");
                 return responce;
 
             }
@@ -98,7 +98,7 @@ public class SelloServiceImpl implements SelloServicios {
 
             }else{
 
-                ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","No user found related to a category");
+                ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","El usuario no fue empadronado antes.");
                 return responce;
 
             }
@@ -160,7 +160,7 @@ public class SelloServiceImpl implements SelloServicios {
             return responce;
 
         } else {
-            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","fail build sello");
+            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","Fallo la Creacion del Sello.");
             return responce;
         }
 
@@ -201,7 +201,7 @@ public class SelloServiceImpl implements SelloServicios {
             return responce;
 
         } else {
-            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","fail build sello");
+            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","Fallo la Creacion del Sello.");
             return responce;
         }
 
