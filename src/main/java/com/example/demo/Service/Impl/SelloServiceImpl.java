@@ -73,7 +73,11 @@ public class SelloServiceImpl implements SelloServicios {
 
         if(datosDTO.getId_tramite() == 1){
 
-            Usuario usuario = usuarioRepocitory.findAllByCuit(datosDTO.getCuit());
+            String s = String.valueOf(datosDTO.getCuit());
+
+            System.out.println(s);
+
+            Usuario usuario = usuarioRepocitory.findAllByCuit(s);
 
             if(usuario != null){
 
@@ -89,7 +93,7 @@ public class SelloServiceImpl implements SelloServicios {
 
         } else if (datosDTO.getId_tramite() == 2) {
 
-            Usuario usuario = usuarioRepocitory.findAllByCuit(datosDTO.getCuit());
+            Usuario usuario = usuarioRepocitory.findAllByCuit(Long.toString(datosDTO.getCuit()));
 
             if(usuario != null){
 

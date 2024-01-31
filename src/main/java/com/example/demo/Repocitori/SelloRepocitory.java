@@ -29,7 +29,7 @@ public interface SelloRepocitory extends JpaRepository<Sello, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "select * from obtener_tramite(:tramiteId,:categoria)", nativeQuery = true)
+    @Query(value = "select * from obtener_tramite_mas_fecha(:tramiteId,:categoria)", nativeQuery = true)
     List<Object[]> obtenerTramite(@Param("tramiteId") Long pId ,@Param("categoria") String categoria);
 
     /*

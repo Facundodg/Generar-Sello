@@ -26,9 +26,10 @@ public class WebSecurityConfig {
     @Bean
     SecurityFilterChain web(HttpSecurity http) throws Exception {
         http
-                .csrf().disable() // (2)
+                .csrf().disable() // (2) esta linea esta pronta va a quedar deprecate parece (investigar)
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/publico/**").permitAll()
+                        .requestMatchers("/actuator/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/sello/**").hasRole("ADMIN")
                         .anyRequest().authenticated()

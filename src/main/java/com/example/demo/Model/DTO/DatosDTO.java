@@ -22,9 +22,9 @@ import lombok.*;
 public class DatosDTO {
 
     @NotNull(message = "El cuit no puede ser nulo")
-    @Size(min = 13, max = 13, message = "El cuit tiene que tener 13 caracteres")
-    @NotBlank
-    private String cuit;
+    //@Size(min = 11, max = 11, message = "El cuit tiene que tener 13 caracteres")
+    //@NotBlank
+    private Long cuit;
     @NotNull(message = "El id_tramite no puede ser nulo")
     private Long id_tramite;
     @NotNull(message = "Los Mt2 no pueden ser nulos")
