@@ -63,6 +63,7 @@ agent any
    stages {
 
 
+    /*
 
     stage('Message start deploy') {
 
@@ -73,6 +74,8 @@ agent any
         }
 
     }
+
+    */
 
     stage('Iniciando variables') {
 
@@ -266,6 +269,8 @@ agent any
     }
     */
 
+    /*
+
     stage('Message finish deploy') {
 
 
@@ -278,6 +283,8 @@ agent any
         }
 
     }
+
+    */
 
    }
 
