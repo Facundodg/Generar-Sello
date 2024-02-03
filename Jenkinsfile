@@ -190,7 +190,7 @@ agent any
 
                     sh "docker run --network estaciones_my-habilitacion -d -p ${PUERTO_EXTERNO}:${PUERTO_INTERNO} --name ${NOMBRE_CONTENEDOR} ${IDENTIFICADOR_IMAGEN}"
 
-
+                    sh 'rm -rf $WORKSPACE'
 
                     /*
 
