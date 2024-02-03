@@ -189,10 +189,11 @@ agent any
                         error "Dockerfile not found"
                     }
 
+                    /*
                     sh "docker stop ${IDENTIFICADOR_IMAGEN}"
                     sh "docker rm ${IDENTIFICADOR_IMAGEN}"
                     sh "docker rmi ${IDENTIFICADOR_IMAGEN}"
-                    
+                    */
 
                     sh "docker build -t ${IDENTIFICADOR_IMAGEN} ."
 
