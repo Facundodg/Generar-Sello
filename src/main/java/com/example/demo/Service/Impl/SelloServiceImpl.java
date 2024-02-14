@@ -75,9 +75,20 @@ public class SelloServiceImpl implements SelloServicios {
 
             String s = String.valueOf(datosDTO.getCuit());
 
-            System.out.println(s);
-
             Usuario usuario = usuarioRepocitory.findAllByCuit(s);
+            System.out.println(usuario.getAnio());
+
+            if(usuario.getAnio() != 2024){
+
+                System.out.println(usuario.getAnio());
+                ResponceDTO responce = new ResponceDTO("fail"
+                        ,null
+                        ,"404"
+                        ,"GenericException"
+                        ,"El contribuyente no fue categorizado para el año 2024, ultima categorizacion " + usuario.getAnio() +".");
+                return responce;
+
+            }
 
             if(usuario != null){
 
@@ -86,7 +97,7 @@ public class SelloServiceImpl implements SelloServicios {
 
             }else{
 
-                ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","El usuario no fue empadronado antes.");
+                ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","El contribuyente no fue empadronado antes.");
                 return responce;
 
             }
@@ -95,6 +106,18 @@ public class SelloServiceImpl implements SelloServicios {
 
             Usuario usuario = usuarioRepocitory.findAllByCuit(Long.toString(datosDTO.getCuit()));
 
+            if(usuario.getAnio() != 2024){
+
+                System.out.println(usuario.getAnio());
+                ResponceDTO responce = new ResponceDTO("fail"
+                        ,null
+                        ,"404"
+                        ,"GenericException"
+                        ,"El contribuyente no fue categorizado para el año 2024, ultima categorizacion " + usuario.getAnio() +".");
+                return responce;
+
+            }
+
             if(usuario != null){
 
                 ResponceDTO responce = tramite2(datosDTO.getId_tramite(),usuario.getCategoria(),usuario.getCuit());
@@ -102,7 +125,7 @@ public class SelloServiceImpl implements SelloServicios {
 
             }else{
 
-                ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","El usuario no fue empadronado antes.");
+                ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","El contribuyente no fue empadronado antes.");
                 return responce;
 
             }

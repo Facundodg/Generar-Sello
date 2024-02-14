@@ -3,13 +3,15 @@ package com.example.demo.Model.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
+
 @Entity
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "usuario", schema = "habilitacion")
+@Table(name = "contribuyente", schema = "habilitacion")
 public class Usuario {
 
     @Id
@@ -19,6 +21,7 @@ public class Usuario {
 
     private String cuit;
     private String categoria;
+    private int anio;
     private boolean tem;
     private boolean cisi;
 

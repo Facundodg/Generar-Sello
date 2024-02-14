@@ -14,7 +14,7 @@ public interface UsuarioRepocitory extends JpaRepository<Usuario, Long> {
     Usuario findAllByCuit(String cuit);
 
     // Método personalizado con la anotación @Query
-    @Query( value = "SELECT * FROM habilitacion.usuario WHERE cuit = :cuit", nativeQuery = true)
+    @Query( value = "SELECT * FROM habilitacion.contribuyente WHERE cuit = :cuit", nativeQuery = true)
     Usuario findAllByCuitAndTemIsTrueAndCisiIsTrue(String cuit);
 
 }
