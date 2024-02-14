@@ -1,5 +1,6 @@
 package com.example.demo.Controller.Impl;
 
+import com.example.demo.Model.DTO.ResponceDTO;
 import com.example.demo.Model.Entity.AuthenticationReq;
 import com.example.demo.Model.Entity.TokenInfo;
 import com.example.demo.Service.Impl.JwtUtilService;
@@ -72,6 +73,7 @@ public class DemoRest {
 
   @PostMapping("/publico/authenticate")
   public ResponseEntity<TokenInfo> authenticate(@RequestBody AuthenticationReq authenticationReq) {
+
     logger.info("Autenticando al usuario {}", authenticationReq.getUsuario());
 
     authenticationManager.authenticate(
@@ -92,6 +94,15 @@ public class DemoRest {
 
     final String jwt = jwtUtilService.generateTokenSinUser();
 
+    /*
+    ResponceDTO respuesta = ResponceDTO.builder()
+            .status("fail")
+            .result(null)
+            .code("403")
+            .exception(exceptionType)
+            .exceptionMessage(exceptionMessage)
+            .build();
+    */
     return ResponseEntity.ok(new TokenInfo(jwt));
 
   }

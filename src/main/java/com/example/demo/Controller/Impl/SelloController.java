@@ -64,17 +64,16 @@ public class SelloController implements SelloApi {
 
         if (ex instanceof ExpiredJwtException) {
             exceptionMessage = "Expired token";
-            exceptionType = "ExpiredJwtException";
+            exceptionType = "com.dim.exception.JwtException.ExpiredJwtException";
         } else if (ex instanceof SignatureException) {
             exceptionMessage = "JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.";
-            exceptionType = "SignatureException";
+            exceptionType = "com.dim.exception.JwtException.SignatureException";
         } else if (ex instanceof MalformedJwtException) {
             exceptionMessage = "JWT strings must contain exactly 2 period characters. Found: 1";
-            exceptionType = "MalformedJwtException";
-            System.out.println("entre ql");
+            exceptionType = "com.dim.exception.JwtException.MalformedJwtException";
         }else {
             exceptionMessage = "Invalid token";
-            exceptionType = "JwtException";
+            exceptionType = "com.dim.exception.JwtException";
         }
         //.MalformedJwtException
 

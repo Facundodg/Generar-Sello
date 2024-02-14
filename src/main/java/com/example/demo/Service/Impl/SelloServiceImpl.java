@@ -76,7 +76,17 @@ public class SelloServiceImpl implements SelloServicios {
             String s = String.valueOf(datosDTO.getCuit());
 
             Usuario usuario = usuarioRepocitory.findAllByCuit(s);
-            System.out.println(usuario.getAnio());
+
+            if(usuario == null){
+
+                ResponceDTO responce = new ResponceDTO("fail"
+                        ,null
+                        ,"404"
+                        ,"com.dim.exception.GenericException.ContribuyenteNoEmpadronado"
+                        ,"El contribuyente no fue empadronado antes.");
+                return responce;
+
+            }
 
             if(usuario.getAnio() != 2024){
 
@@ -84,7 +94,7 @@ public class SelloServiceImpl implements SelloServicios {
                 ResponceDTO responce = new ResponceDTO("fail"
                         ,null
                         ,"404"
-                        ,"GenericException"
+                        ,"com.dim.exception.GenericException.ContribuyenteNoCategorizadoEnEsteAnio"
                         ,"El contribuyente no fue categorizado para el año 2024, ultima categorizacion " + usuario.getAnio() +".");
                 return responce;
 
@@ -106,13 +116,24 @@ public class SelloServiceImpl implements SelloServicios {
 
             Usuario usuario = usuarioRepocitory.findAllByCuit(Long.toString(datosDTO.getCuit()));
 
+            if(usuario == null){
+
+                ResponceDTO responce = new ResponceDTO("fail"
+                        ,null
+                        ,"404"
+                        ,"com.dim.exception.GenericException.ContribuyenteNoEmpadronado"
+                        ,"El contribuyente no fue empadronado antes.");
+                return responce;
+
+            }
+
             if(usuario.getAnio() != 2024){
 
                 System.out.println(usuario.getAnio());
                 ResponceDTO responce = new ResponceDTO("fail"
                         ,null
                         ,"404"
-                        ,"GenericException"
+                        ,"com.dim.exception.GenericException.ContribuyenteNoCategorizadoEnEsteAnio"
                         ,"El contribuyente no fue categorizado para el año 2024, ultima categorizacion " + usuario.getAnio() +".");
                 return responce;
 
@@ -140,7 +161,7 @@ public class SelloServiceImpl implements SelloServicios {
     } catch (Exception e) {
 
             e.printStackTrace();
-            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","Algo fallo.");
+            ResponceDTO responce = new ResponceDTO("fail",null,"404","com.dim.exception.GenericException","Algo fallo.");
             return responce;
 
     }
@@ -187,7 +208,7 @@ public class SelloServiceImpl implements SelloServicios {
             return responce;
 
         } else {
-            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","Fallo la Creacion del Sello.");
+            ResponceDTO responce = new ResponceDTO("fail",null,"404","com.dim.exception.GenericException.SelloMalFormet","Fallo la Creacion del Sello.");
             return responce;
         }
 
@@ -228,7 +249,7 @@ public class SelloServiceImpl implements SelloServicios {
             return responce;
 
         } else {
-            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","Fallo la Creacion del Sello.");
+            ResponceDTO responce = new ResponceDTO("fail",null,"404","com.dim.exception.GenericException.SelloMalFormet ","Fallo la Creacion del Sello.");
             return responce;
         }
 
