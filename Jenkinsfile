@@ -63,6 +63,7 @@ agent any
    stages {
 
 
+    /*
 
     stage('Message start deploy') {
 
@@ -73,6 +74,8 @@ agent any
         }
 
     }
+
+    */
 
     stage('Iniciando variables') {
 
@@ -186,11 +189,17 @@ agent any
                         error "Dockerfile not found"
                     }
 
+                    /*
+                    sh "docker stop ${IDENTIFICADOR_IMAGEN}"
+                    sh "docker rm ${IDENTIFICADOR_IMAGEN}"
+                    sh "docker rmi ${IDENTIFICADOR_IMAGEN}"
+                    */
+
                     sh "docker build -t ${IDENTIFICADOR_IMAGEN} ."
 
                     sh "docker run --network estaciones_my-habilitacion -d -p ${PUERTO_EXTERNO}:${PUERTO_INTERNO} --name ${NOMBRE_CONTENEDOR} ${IDENTIFICADOR_IMAGEN}"
 
-
+                    //sh 'rm -rf $WORKSPACE'
 
                     /*
 
@@ -207,6 +216,8 @@ agent any
 
                      */
                 }
+
+                cleanWs()
 
             }
         }
@@ -266,6 +277,8 @@ agent any
     }
     */
 
+    /*
+
     stage('Message finish deploy') {
 
 
@@ -278,6 +291,8 @@ agent any
         }
 
     }
+
+    */
 
    }
 
