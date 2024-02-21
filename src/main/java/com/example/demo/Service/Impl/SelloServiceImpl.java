@@ -182,6 +182,8 @@ public class SelloServiceImpl implements SelloServicios {
                 }
             }
 
+
+
             Long cant_urbanos_inspeccion = Long.parseLong(objetosAlmacenados.get(1).toString());
             Long cant_urbanos_tasaAdministrativa = Long.parseLong(objetosAlmacenados.get(5).toString());
             Long cant_urbanos_factibilidad = Long.parseLong(objetosAlmacenados.get(9).toString());
