@@ -21,7 +21,7 @@ public class DataSourceConfig {
 
     @Primary
     @Bean(name = "postgresDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.postgresql")
+    @ConfigurationProperties(prefix = "spring.datasource.postgres")
     public DataSource postgresDataSource() {
         return DataSourceBuilder.create().build();
     }
