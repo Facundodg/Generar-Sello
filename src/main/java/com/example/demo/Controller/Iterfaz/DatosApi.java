@@ -1,6 +1,6 @@
 package com.example.demo.Controller.Iterfaz;
 
-import com.example.demo.Model.Entity.Datos;
+import com.example.demo.Model.Entity.postgres.Datos;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

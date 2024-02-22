@@ -1,7 +1,6 @@
 package com.example.demo.Repocitori;
 
-import com.example.demo.Model.DTO.SelloBajaDTO;
-import com.example.demo.Model.Entity.Sello;
+import com.example.demo.Model.Entity.postgres.Sello;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

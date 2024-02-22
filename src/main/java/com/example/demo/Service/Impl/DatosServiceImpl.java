@@ -1,8 +1,7 @@
 package com.example.demo.Service.Impl;
 
 import com.example.demo.Model.DTO.DatosDTO;
-import com.example.demo.Model.DTO.SelloDTO;
-import com.example.demo.Model.Entity.Datos;
+import com.example.demo.Model.Entity.postgres.Datos;
 import com.example.demo.Repocitori.DatoRepocitory;
 import com.example.demo.Service.Interfaz.DatoServicios;
 import lombok.RequiredArgsConstructor;

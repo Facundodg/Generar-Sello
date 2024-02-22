@@ -1,8 +1,8 @@
 package com.example.demo.Service.Impl;
 
 import com.example.demo.Model.DTO.*;
-import com.example.demo.Model.Entity.Sello;
-import com.example.demo.Model.Entity.Usuario;
+import com.example.demo.Model.Entity.postgres.Sello;
+import com.example.demo.Model.Entity.sqlserver.Usuario;
 import com.example.demo.Repocitori.SelloRepocitory;
 import com.example.demo.Repocitori.UsuarioRepocitory;
 import com.example.demo.Service.Interfaz.DatoServicios;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -75,7 +74,8 @@ public class SelloServiceImpl implements SelloServicios {
 
             String s = String.valueOf(datosDTO.getCuit());
 
-            Usuario usuario = usuarioRepocitory.findAllByCuit(s);
+            //cambiar de vuelta
+            Usuario usuario = usuarioRepocitory.findByCuitSqlServer(s);
 
             if(usuario == null){
 

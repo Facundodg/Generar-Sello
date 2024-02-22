@@ -1,4 +1,4 @@
-package com.example.demo.Model.Entity;
+package com.example.demo.Model.Entity.sqlserver;
 
 import jakarta.persistence.*;
 import lombok.*;

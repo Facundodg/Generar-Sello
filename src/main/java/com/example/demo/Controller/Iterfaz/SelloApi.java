@@ -2,8 +2,6 @@ package com.example.demo.Controller.Iterfaz;
 
 import com.example.demo.Model.DTO.DatosDTO;
 import com.example.demo.Model.DTO.ResponceDTO;
-import com.example.demo.Model.DTO.SelloDTO;
-import com.example.demo.Model.Entity.Datos;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

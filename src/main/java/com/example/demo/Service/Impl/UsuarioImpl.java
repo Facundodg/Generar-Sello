@@ -1,6 +1,6 @@
 package com.example.demo.Service.Impl;
 
-import com.example.demo.Model.Entity.Usuario;
+import com.example.demo.Model.Entity.sqlserver.Usuario;
 import com.example.demo.Repocitori.UsuarioRepocitory;
 import com.example.demo.Service.Interfaz.UsuarioServicios;
 import lombok.RequiredArgsConstructor;

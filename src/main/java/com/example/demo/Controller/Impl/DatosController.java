@@ -1,7 +1,7 @@
 package com.example.demo.Controller.Impl;
 
 import com.example.demo.Controller.Iterfaz.DatosApi;
-import com.example.demo.Model.Entity.Datos;
+import com.example.demo.Model.Entity.postgres.Datos;
 import com.example.demo.Service.Interfaz.DatoServicios;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
