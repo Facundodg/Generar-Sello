@@ -50,7 +50,7 @@ agent any
         DOCKERHUB_CREDENCIALES = "dockerhub"
         KUBERNETES_CREDENCIALES = "k8s-jenkins-account-15"
         SONARQUBE_CREDENCIALES = 'sonarqube'
-        PUERTO_EXTERNO = 6060
+        PUERTO_EXTERNO = 5050
 
         CANAL_SLACK = "#canal-slack"            // TODO: Por reemplazar
         CORREO_A_NOTIFICAR = "dim@gmail.com"    // TODO: Por reemplazar
@@ -175,9 +175,9 @@ agent any
      stage('Build and run') {
 
         environment{
-             PUERTO_INTERNO = 6060 //modifique 
-             NOMBRE_CONTENEDOR = "api_habilitacion2" //modifique 
-             IDENTIFICADOR_IMAGEN = "api_habilitacion2" //modifique 
+             PUERTO_INTERNO = 5050 //modifique 
+             NOMBRE_CONTENEDOR = "api_habilitacion" //modifique 
+             IDENTIFICADOR_IMAGEN = "api_habilitacion" //modifique 
          }
 
         steps {
