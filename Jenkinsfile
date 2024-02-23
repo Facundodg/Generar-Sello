@@ -50,7 +50,7 @@ agent any
         DOCKERHUB_CREDENCIALES = "dockerhub"
         KUBERNETES_CREDENCIALES = "k8s-jenkins-account-15"
         SONARQUBE_CREDENCIALES = 'sonarqube'
-        PUERTO_EXTERNO = 5050
+        PUERTO_EXTERNO = 6060
 
         CANAL_SLACK = "#canal-slack"            // TODO: Por reemplazar
         CORREO_A_NOTIFICAR = "dim@gmail.com"    // TODO: Por reemplazar
