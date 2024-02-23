@@ -175,9 +175,9 @@ agent any
      stage('Build and run') {
 
         environment{
-             PUERTO_INTERNO = 5050
-             NOMBRE_CONTENEDOR = "api_habilitacion"
-             IDENTIFICADOR_IMAGEN = "api_habilitacion"
+             PUERTO_INTERNO = 6060 //modifique 
+             NOMBRE_CONTENEDOR = "api_habilitacion2" //modifique 
+             IDENTIFICADOR_IMAGEN = "api_habilitacion2" //modifique 
          }
 
         steps {
