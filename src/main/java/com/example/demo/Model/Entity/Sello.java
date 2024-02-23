@@ -1,4 +1,4 @@
-package com.example.demo.Model.Entity.postgres;
+package com.example.demo.Model.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;

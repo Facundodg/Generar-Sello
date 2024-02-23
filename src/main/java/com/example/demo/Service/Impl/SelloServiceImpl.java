@@ -1,8 +1,8 @@
 package com.example.demo.Service.Impl;
 
 import com.example.demo.Model.DTO.*;
-import com.example.demo.Model.Entity.postgres.Sello;
-import com.example.demo.Model.Entity.sqlserver.Usuario;
+import com.example.demo.Model.Entity.Sello;
+import com.example.demo.Model.Entity.Usuario;
 import com.example.demo.Repocitori.SelloRepocitory;
 import com.example.demo.Repocitori.UsuarioRepocitory;
 import com.example.demo.Service.Interfaz.DatoServicios;
@@ -68,105 +68,180 @@ public class SelloServiceImpl implements SelloServicios {
     @Override
     public ResponceDTO generarSello(DatosDTO datosDTO) {
 
-    try{
 
-        if(datosDTO.getId_tramite() == 1){
+        try {
 
-            String s = String.valueOf(datosDTO.getCuit());
+            //--TRAE LA CATEGORIA DE EL CONTRIBUYENTE EN BASE A CUIT--
 
+            String cuit = String.valueOf(datosDTO.getCuit());
             //cambiar de vuelta
-            Usuario usuario = usuarioRepocitory.findByCuitSqlServer(s);
+            Object usu = usuarioRepocitory.findByCuitSqlServer(cuit);
 
-            if(usuario == null){
-
-                ResponceDTO responce = new ResponceDTO("fail"
-                        ,null
-                        ,"404"
-                        ,"com.dim.exception.GenericException.ContribuyenteNoEmpadronado"
-                        ,"El contribuyente no fue empadronado antes.");
-                return responce;
-
-            }
-
-            if(usuario.getAnio() != 2024){
-
-                System.out.println(usuario.getAnio());
-                ResponceDTO responce = new ResponceDTO("fail"
-                        ,null
-                        ,"404"
-                        ,"com.dim.exception.GenericException.ContribuyenteNoCategorizadoEnEsteAnio"
-                        ,"El contribuyente no fue categorizado para el año 2024, ultima categorizacion " + usuario.getAnio() +".");
-                return responce;
-
-            }
-
-            if(usuario != null){
-
-                ResponceDTO responce = tramite1(datosDTO.getId_tramite(),usuario.getCategoria(),usuario.getCuit());
-                return responce;
-
-            }else{
-
-                ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","El contribuyente no fue empadronado antes.");
-                return responce;
-
-            }
-
-        } else if (datosDTO.getId_tramite() == 2) {
-
-            Usuario usuario = usuarioRepocitory.findAllByCuit(Long.toString(datosDTO.getCuit()));
-
-            if(usuario == null){
+            //si no viene contribuyente en la consulta es por que no esta empadronado
+            if (usu == null) {
 
                 ResponceDTO responce = new ResponceDTO("fail"
-                        ,null
-                        ,"404"
-                        ,"com.dim.exception.GenericException.ContribuyenteNoEmpadronado"
-                        ,"El contribuyente no fue empadronado antes.");
+                        , null
+                        , "404"
+                        , "com.dim.exception.GenericException.ContribuyenteNoEmpadronado"
+                        , "El contribuyente no fue empadronado antes.");
                 return responce;
 
             }
 
-            if(usuario.getAnio() != 2024){
+            Object[] usuArray = (Object[]) usu;
+            // Crear un nuevo arreglo para almacenar los elementos
+            Object[] newArray = new Object[usuArray.length];
+            // Copiar los elementos del usuArray al newArray
+            for (int i = 0; i < usuArray.length; i++) {
+                newArray[i] = usuArray[i];
+            }
 
-                System.out.println(usuario.getAnio());
+            System.out.println("cuit: " + newArray[0]);
+            System.out.println("categoria: " + newArray[1]);
+            System.out.println("anio: " + newArray[2]);
+
+            Usuario contribuyente = Usuario.builder()
+                    .cuit(String.valueOf(newArray[0]))
+                    .categoria(String.valueOf(newArray[1]))
+                    .anio(Integer.parseInt(String.valueOf(newArray[2])))
+                    .build();
+
+
+            if (contribuyente.getAnio() != 2024) { //cambiar ya que este se tiene que poder ser dinamico
+
                 ResponceDTO responce = new ResponceDTO("fail"
-                        ,null
-                        ,"404"
-                        ,"com.dim.exception.GenericException.ContribuyenteNoCategorizadoEnEsteAnio"
-                        ,"El contribuyente no fue categorizado para el año 2024, ultima categorizacion " + usuario.getAnio() +".");
+                        , null
+                        , "404"
+                        , "com.dim.exception.GenericException.ContribuyenteNoCategorizadoEnEsteAnio"
+                        , "El contribuyente no fue categorizado para el año 2024, ultima categorizacion " + String.valueOf(newArray[2]) + ".");
                 return responce;
 
             }
 
-            if(usuario != null){
 
-                ResponceDTO responce = tramite2(datosDTO.getId_tramite(),usuario.getCategoria(),usuario.getCuit());
-                return responce;
+            //-------------------------------------------------------
 
-            }else{
+            //--TRAMITES---------------------------------------------
 
-                ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","El contribuyente no fue empadronado antes.");
-                return responce;
+            ResponceDTO responce = GetSelloForTramite(datosDTO.getId_tramite(), contribuyente.getCategoria(), contribuyente.getCuit());
 
-            }
+            return responce;
 
-        }else{
+            //-------------------------------------------------------
 
-            ResponceDTO responce = new ResponceDTO("fail",null,"404","GenericException","id_tramite no encontrado");
+
+            //Usuario usuario = usuarioRepocitory.findAllByCuit("123456789"); //suplantar con objeto harcodeado
+
+
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            ResponceDTO responce = new ResponceDTO("fail", null, "404", "com.dim.exception.GenericException", "Algo fallo.");
             return responce;
 
         }
 
-    } catch (Exception e) {
+    }
 
-            e.printStackTrace();
-            ResponceDTO responce = new ResponceDTO("fail",null,"404","com.dim.exception.GenericException","Algo fallo.");
+    public ResponceDTO GetSelloForTramite(long id_tramite, String categoria, String cuit) {
+
+        List<Object> respuestaAlmacenada = new ArrayList<>();
+
+        //List<Object[]> resultados = selloRepocitory.obtenerTramite(id_tramite, categoria); //funcion harcodeada
+
+        //obtenerDatos
+
+        int opcion = (int) id_tramite;
+
+        List<Object[]> resultados = selloRepocitory.obtenerSello(id_tramite,categoria,2024);
+
+        //List<Object[]> resultados = obtenerDatos(opcion);
+
+        if (resultados != null) {
+
+            for (Object[] resultado : resultados) {
+                for (Object elemento : resultado) {
+                    respuestaAlmacenada.add(elemento);
+                }
+
+            }
+
+            double costo = 17.0;
+
+            if (id_tramite == 1) {
+
+                System.out.println(respuestaAlmacenada.get(3).toString());
+
+                //Double.parseDouble()
+
+                Double cant_urbanos_inspeccion = Double.parseDouble(respuestaAlmacenada.get(3).toString());
+                Double cant_urbanos_tasaAdministrativa = Double.parseDouble(respuestaAlmacenada.get(9).toString());
+                Double cant_urbanos_factibilidad = Double.parseDouble(respuestaAlmacenada.get(15).toString());
+                Double cant_urbanos_categoria = Double.parseDouble(respuestaAlmacenada.get(22).toString());
+
+                Concepto conceptoDTO = Concepto.builder()
+                        .inspeccion(cant_urbanos_inspeccion * costo)
+                        .tasaAdministrativa(cant_urbanos_tasaAdministrativa * costo)
+                        .factibilidad(cant_urbanos_factibilidad * costo)
+                        .categoria(cant_urbanos_categoria)
+                        .build();
+
+                SelloDTO selloDTO = SelloDTO.builder()
+                        .tipoCategoria(categoria)
+                        .importeTotal(conceptoDTO.getCategoria() + conceptoDTO.getFactibilidad() + conceptoDTO.getTasaAdministrativa() + conceptoDTO.getInspeccion())
+                        .conceptoDTO(conceptoDTO)
+                        .id_tramite(id_tramite)
+                        .cuit(cuit)
+                        .build();
+
+                ResponceDTO responce = new ResponceDTO("ok", selloDTO, "200 OK", "", "");
+
+                return responce;
+
+            } else if (id_tramite == 2) {
+
+                Double cant_urbanos_reinspeccion = Double.parseDouble(respuestaAlmacenada.get(3).toString());
+                String categoria_reinspeccion = categoria;
+                //double costo = (double) objetosAlmacenados.get(3);
+
+                ConceptoReinspeccion conceptoReinspeccion = ConceptoReinspeccion.builder()
+                        .inspeccion(cant_urbanos_reinspeccion * costo)
+                        .build();
+
+                SelloDTO selloDTO = SelloDTO.builder()
+                        .tipoCategoria(categoria)
+                        .importeTotal(conceptoReinspeccion.getInspeccion())
+                        .conceptoDTO(conceptoReinspeccion)
+                        .id_tramite(id_tramite)
+                        .cuit(cuit)
+                        .build();
+
+                ResponceDTO responce = new ResponceDTO("ok", selloDTO, "200 OK", "", "");
+
+                return responce;
+
+
+            }else{
+
+                ResponceDTO responce = new ResponceDTO("fail", null, "404", "com.dim.exception.GenericException.SelloMalFormet", "Fallo la Creacion del Sello.");
+                return responce;
+
+            }
+
+
+        } else {
+            ResponceDTO responce = new ResponceDTO("fail", null, "404", "com.dim.exception.GenericException.SelloMalFormet", "Fallo la Creacion del Sello.");
             return responce;
+        }
+
+        //20173762918
+        //20121650674
 
     }
 
-    }
+
 
     public ResponceDTO tramite1(long id_tramite,String categoria,String cuit){
 
@@ -255,6 +330,24 @@ public class SelloServiceImpl implements SelloServicios {
 
     }
 
+
+    public List<Object[]> obtenerDatos(int opcion) {
+        List<Object[]> datos = new ArrayList<>();
+
+        if (opcion == 1) {
+            datos.add(new Object[]{1, 1, "Inspeccion", 550,17});
+            datos.add(new Object[]{1, 2, "Tasa Administrativa", 20,17});
+            datos.add(new Object[]{1, 3, "Factibilidad", 150,17});
+            datos.add(new Object[]{1, 4, "Categoria C", 150,17});
+        } else if (opcion == 2) {
+            datos.add(new Object[]{2, 5, "Re-Inspeccion", 150,17});
+        } else {
+            throw new IllegalArgumentException("Opción no válida");
+        }
+
+        return datos;
+    }
+
 }
                 /*
             Object[] resultado = selloRepocitory.obtenerTramite(datosDTO.getId_tramite()).stream().findFirst().orElse(null);
@@ -270,4 +363,95 @@ public class SelloServiceImpl implements SelloServicios {
             System.out.println(objetosAlmacenados.get(13).toString());
             System.out.println(objetosAlmacenados.get(14).toString());
             System.out.println(objetosAlmacenados.get(15).toString());
+
+
+
+
+
+            if (datosDTO.getId_tramite() == 1) {
+
+                if (usuario == null) {
+
+                    ResponceDTO responce = new ResponceDTO("fail"
+                            , null
+                            , "404"
+                            , "com.dim.exception.GenericException.ContribuyenteNoEmpadronado"
+                            , "El contribuyente no fue empadronado antes.");
+                    return responce;
+
+                }
+
+                if (usuario.getAnio() != 2024) {
+
+                    System.out.println(usuario.getAnio());
+                    ResponceDTO responce = new ResponceDTO("fail"
+                            , null
+                            , "404"
+                            , "com.dim.exception.GenericException.ContribuyenteNoCategorizadoEnEsteAnio"
+                            , "El contribuyente no fue categorizado para el año 2024, ultima categorizacion " + usuario.getAnio() + ".");
+                    return responce;
+
+                }
+
+                if (usuario != null) {
+
+                    ResponceDTO responce = tramite1(datosDTO.getId_tramite(), usuario.getCategoria(), usuario.getCuit());
+                    return responce;
+
+                } else {
+
+                    ResponceDTO responce = new ResponceDTO("fail", null, "404", "GenericException", "El contribuyente no fue empadronado antes.");
+                    return responce;
+
+                }
+
+            } else if (datosDTO.getId_tramite() == 2) {
+
+                //Usuario usuario = usuarioRepocitory.findAllByCuit(Long.toString(datosDTO.getCuit()));
+
+                Usuario usuario2 = usuarioRepocitory.findAllByCuit("123456789"); //suplantar con objeto harcodeadoU
+
+
+                if (usuario2 == null) {
+
+                    ResponceDTO responce = new ResponceDTO("fail"
+                            , null
+                            , "404"
+                            , "com.dim.exception.GenericException.ContribuyenteNoEmpadronado"
+                            , "El contribuyente no fue empadronado antes.");
+                    return responce;
+
+                }
+
+                if (usuario2.getAnio() != 2024) {
+
+                    System.out.println(usuario.getAnio());
+                    ResponceDTO responce = new ResponceDTO("fail"
+                            , null
+                            , "404"
+                            , "com.dim.exception.GenericException.ContribuyenteNoCategorizadoEnEsteAnio"
+                            , "El contribuyente no fue categorizado para el año 2024, ultima categorizacion " + usuario.getAnio() + ".");
+                    return responce;
+
+                }
+
+                if (usuario != null) {
+
+                    ResponceDTO responce = tramite2(datosDTO.getId_tramite(), usuario.getCategoria(), usuario.getCuit());
+                    return responce;
+
+                } else {
+
+                    ResponceDTO responce = new ResponceDTO("fail", null, "404", "GenericException", "El contribuyente no fue empadronado antes.");
+                    return responce;
+
+                }
+
+            } else {
+
+                ResponceDTO responce = new ResponceDTO("fail", null, "404", "GenericException", "id_tramite no encontrado");
+                return responce;
+
+            }
+
                 */
