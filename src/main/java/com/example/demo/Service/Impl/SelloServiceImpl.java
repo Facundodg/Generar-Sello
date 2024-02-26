@@ -179,12 +179,19 @@ public class SelloServiceImpl implements SelloServicios {
                 Double cant_urbanos_inspeccion = Double.parseDouble(respuestaAlmacenada.get(3).toString());
                 Double cant_urbanos_tasaAdministrativa = Double.parseDouble(respuestaAlmacenada.get(9).toString());
                 Double cant_urbanos_factibilidad = Double.parseDouble(respuestaAlmacenada.get(15).toString());
-                Double cant_urbanos_categoria = Double.parseDouble(respuestaAlmacenada.get(22).toString());
+                Double cant_urbanos_categoria = Double.parseDouble(respuestaAlmacenada.get(21).toString());
+
+                int i = 0;
+                for (Object elemento : respuestaAlmacenada) {
+                    System.out.println(elemento);
+                    i++;
+                    System.out.println(i);
+                }
 
                 Concepto conceptoDTO = Concepto.builder()
-                        .inspeccion(cant_urbanos_inspeccion * costo)
-                        .tasaAdministrativa(cant_urbanos_tasaAdministrativa * costo)
-                        .factibilidad(cant_urbanos_factibilidad * costo)
+                        .inspeccion(cant_urbanos_inspeccion)
+                        .tasaAdministrativa(cant_urbanos_tasaAdministrativa)
+                        .factibilidad(cant_urbanos_factibilidad)
                         .categoria(cant_urbanos_categoria)
                         .build();
 
@@ -207,7 +214,7 @@ public class SelloServiceImpl implements SelloServicios {
                 //double costo = (double) objetosAlmacenados.get(3);
 
                 ConceptoReinspeccion conceptoReinspeccion = ConceptoReinspeccion.builder()
-                        .inspeccion(cant_urbanos_reinspeccion * costo)
+                        .inspeccion(cant_urbanos_reinspeccion)
                         .build();
 
                 SelloDTO selloDTO = SelloDTO.builder()
