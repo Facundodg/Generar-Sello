@@ -49,7 +49,7 @@ agent any
         GITHUB_CREDENCIALES = "github"
         DOCKERHUB_CREDENCIALES = "dockerhub"
         KUBERNETES_CREDENCIALES = "k8s-jenkins-account-15"
-        SONARQUBE_CREDENCIALES = 'sonarqube'
+        SONARQUBE_CREDENCIALES = 'sonar'
         PUERTO_EXTERNO = 5050
 
         CANAL_SLACK = "#canal-slack"            // TODO: Por reemplazar
