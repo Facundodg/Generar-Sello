@@ -209,8 +209,8 @@ agent any
                     //image: api_habilitacion:${TAG}
 
                         //sh "ls ${CARPETA_DESPLIEGUE}/habilitacion"
-                        sh "docker-compose up --env TAG=${TAG}"
-
+                        //sh "docker compose up --env TAG=${TAG}"
+                        sh "docker compose up"
                     }
 
                 }
