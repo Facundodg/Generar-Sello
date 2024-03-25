@@ -149,6 +149,12 @@ agent any
 
             }
 
+            script {
+
+                sh "ls ${WORKSPACE}/${CARPETA_DESPLIEGUE}"
+
+            }
+
 
             steps {
 
