@@ -54,7 +54,7 @@ agent any
 
         //--CARPETAS--
         CARPETA_APLICACION = './'
-        CARPETA_DESPLIEGUE = './manifest'
+        CARPETA_DESPLIEGUE = 'manifest'
 
         TAG = 004
 
@@ -194,7 +194,7 @@ agent any
                     //docker-compose up -d --build --env TAG=003
                     //image: api_habilitacion:${TAG}
 
-                        sh "ls ${DIRECCION_DESPLIEGUE}/${CARPETA_MANIFIESTO}/habilitacion"
+                        sh "ls ${CARPETA_DESPLIEGUE}/${CARPETA_MANIFIESTO}/habilitacion"
                         sh "docker compose up -d --build --env TAG=${TAG}"
 
 
