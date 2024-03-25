@@ -63,159 +63,162 @@ agent any
    stages {
 
 
+        stage('Message start deploy') {
 
-    stage('Message start deploy') {
+            steps {
 
-        steps {
+                discordSend description: "Inicio de deploy PRODUCCION!!!", footer: "Inicado", link: env.BUILD_URL, result: currentBuild.currentResult, title: "Deploy Api-habilitaciones (PRODUCCION)", webhookURL: "https://discord.com/api/webhooks/1173648912838561922/iB8YUryvKbcj66EWQa2e6161BDuygkfaMx57VUalxPnDAMvoRHcYKxJTaxV4nfBEdoxi"
 
-            discordSend description: "Inicio de deploy PRODUCCION!!!", footer: "Inicado", link: env.BUILD_URL, result: currentBuild.currentResult, title: "Deploy Api-habilitaciones (PRODUCCION)", webhookURL: "https://discord.com/api/webhooks/1173648912838561922/iB8YUryvKbcj66EWQa2e6161BDuygkfaMx57VUalxPnDAMvoRHcYKxJTaxV4nfBEdoxi"
+            }
 
         }
 
-    }
+
+        stage('Iniciando variables') {
+
+            steps {
+
+                dir("${CARPETA_APLICACION}"){
+
+                    script {
+
+                        PROYECTO_VERSION = sh(returnStdout: true, script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout')
+                        ARTIFACT_ID = sh(script: "mvn help:evaluate -Dexpression=project.artifactId -f pom.xml -q -DforceStdout", returnStdout: true).trim()
+                        IDENTIFICADOR_PROYECTO = "${ARTIFACT_ID}:${PROYECTO_VERSION}"
+                        IDENTIFICADOR_UNICO_BUILD = "${IDENTIFICADOR_PROYECTO}.${BUILD_NUMBER}"
+
+                    }
+
+                }
 
 
-    stage('Iniciando variables') {
+            }
 
-        steps {
+        }
 
-            dir("${CARPETA_APLICACION}"){
+        stage('Tools initialization') {
+
+            steps {
 
                 script {
 
-                    PROYECTO_VERSION = sh(returnStdout: true, script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout')
-                    ARTIFACT_ID = sh(script: "mvn help:evaluate -Dexpression=project.artifactId -f pom.xml -q -DforceStdout", returnStdout: true).trim()
-                    IDENTIFICADOR_PROYECTO = "${ARTIFACT_ID}:${PROYECTO_VERSION}"
-                    IDENTIFICADOR_UNICO_BUILD = "${IDENTIFICADOR_PROYECTO}.${BUILD_NUMBER}"
+                    if (env.BRANCH_NAME){
 
-                }
+                        RAMA_PARA_CLONAR = env.BRANCH_NAME
 
-            }
+                    }
+                    else{
 
+                        RAMA_PARA_CLONAR = 'Dev-prueba2'
 
-        }
-
-    }
-
-    stage('Tools initialization') {
-        steps {
-            script {
-
-                if (env.BRANCH_NAME){
-
-                    RAMA_PARA_CLONAR = env.BRANCH_NAME
-
-                }
-                else{
-
-                    RAMA_PARA_CLONAR = 'Dev-prueba2'
-
-                }
-
-
-                DOCKER_VERSION = sh(returnStdout: true, script: 'docker version').trim()
-                JAVA_VERSION = sh(returnStdout: true, script: 'java -version').trim()
-                MAVEN_VERSION = sh(returnStdout: true, script: 'mvn -v').trim()
-
-                echo "Docker version: ${DOCKER_VERSION}"
-                echo "Java version: ${JAVA_VERSION}"
-                echo "Maven version: ${MAVEN_VERSION}"
-            }
-        }
-    }
-
-
-    stage('Build Maven') {
-
-        steps{
-
-                sh "mvn -version"
-                sh "mvn clean package -DskipTests"
-
-            }
-
-        }
-
-
-    stage('Clone Manifest'){
-
-        environment {
-
-            CARPETA_MANIFIESTO = "${RAMA_PARA_CLONAR == 'Dev-prueba2' ? 'prod' : 'Dev-prueba2'}"
-            DIRECCION_DESPLIEGUE = "${WORKSPACE}/${CARPETA_DESPLIEGUE}"
-
-        }
-
-
-    }
-
-
-    stage('Build and run') {
-
-        environment{
-             PUERTO_INTERNO = 5050
-             NOMBRE_CONTENEDOR = "api_habilitacion" 
-             IDENTIFICADOR_IMAGEN = "api_habilitacion"
-         }
-
-         
-        steps {
-
-            script {
-
-                dir ("${CARPETA_APLICACION}"){
-                    // Verifica si existe un archivo Dockerfile en la subcarpeta actual
-                    if (!fileExists("Dockerfile")) {
-                        error "Dockerfile not found"
                     }
 
-                    sh "docker build -t ${IDENTIFICADOR_IMAGEN}:${TAG} ."
+
+                    DOCKER_VERSION = sh(returnStdout: true, script: 'docker version').trim()
+                    JAVA_VERSION = sh(returnStdout: true, script: 'java -version').trim()
+                    MAVEN_VERSION = sh(returnStdout: true, script: 'mvn -v').trim()
+
+                    echo "Docker version: ${DOCKER_VERSION}"
+                    echo "Java version: ${JAVA_VERSION}"
+                    echo "Maven version: ${MAVEN_VERSION}"
+                }
+
+            }
+
+        }
+
+
+        stage('Build Maven') {
+
+            steps{
+
+                    sh "mvn -version"
+                    sh "mvn clean package -DskipTests"
+
+                }
+
+            }
+
+
+        stage('Clone Manifest'){
+
+            environment {
+
+                CARPETA_MANIFIESTO = "${RAMA_PARA_CLONAR == 'Dev-prueba2' ? 'prod' : 'Dev-prueba2'}"
+                DIRECCION_DESPLIEGUE = "${WORKSPACE}/${CARPETA_DESPLIEGUE}"
+
+            }
+
+
+            steps {
+
+                checkout scmGit(branches: [[name: 'Dev-prueba2']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${CARPETA_DESPLIEGUE}"]], userRemoteConfigs: [[credentialsId: "${GITHUB_CREDENCIALES_DEPLOY}", url: "${GITHUB_MANIFEST_URL}"]])
+
+            }
+
+
+        }
+
+
+        stage('Build and run') {
+
+            environment{
+
+                PUERTO_INTERNO = 5050
+                NOMBRE_CONTENEDOR = "api_habilitacion" 
+                IDENTIFICADOR_IMAGEN = "api_habilitacion"
+
+            }
+
+            
+            steps {
+
+                script {
+
+                    dir ("${CARPETA_APLICACION}"){
+                        // Verifica si existe un archivo Dockerfile en la subcarpeta actual
+                        if (!fileExists("Dockerfile")) {
+                            error "Dockerfile not found"
+                        }
+
+                        sh "docker build -t ${IDENTIFICADOR_IMAGEN}:${TAG} ."
+
+                    }
+
 
                 }
 
 
-            }
+                dir ("${CARPETA_DESPLIEGUE}"){
 
-            checkout scmGit(branches: [[name: 'Dev-prueba2']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${CARPETA_DESPLIEGUE}"]], userRemoteConfigs: [[credentialsId: "${GITHUB_CREDENCIALES_DEPLOY}", url: "${GITHUB_MANIFEST_URL}"]])
+                    //docker-compose up -d --build --env TAG=003
+                    //image: api_habilitacion:${TAG}
 
-            dir ("${CARPETA_DESPLIEGUE}"){
+                        sh "ls ${DIRECCION_DESPLIEGUE}/${CARPETA_MANIFIESTO}/habilitacion"
+                        sh "docker compose up -d --build --env TAG=${TAG}"
 
-                //docker-compose up -d --build --env TAG=003
-                //image: api_habilitacion:${TAG}
 
-                    sh "ls ${DIRECCION_DESPLIEGUE}/${CARPETA_MANIFIESTO}/habilitacion"
-                    sh "docker compose up -d --build --env TAG=${TAG}"
-
+                }
 
             }
 
-        }
-
-
-     }
-
-
-    stage('Build and run') {
-
-
-
-    }
-
- 
-    stage('Message finish deploy') {
-
-
-        steps {
-
-            sh "echo ${HORA_DESPLIEGUE}"
-
-            discordSend description: "Deploy de estaciones echo en PRODUCCION!!!", footer: "Hora de inicio de despliegue: ${HORA_DESPLIEGUE} ", link: env.BUILD_URL, result: currentBuild.currentResult, title: "Deploy Api-habilitaciones (PRODUCCION)", webhookURL: "https://discord.com/api/webhooks/1173648912838561922/iB8YUryvKbcj66EWQa2e6161BDuygkfaMx57VUalxPnDAMvoRHcYKxJTaxV4nfBEdoxi"
 
         }
+    
+        stage('Message finish deploy') {
 
-        
 
-    }
+            steps {
+
+                sh "echo ${HORA_DESPLIEGUE}"
+
+                discordSend description: "Deploy de estaciones echo en PRODUCCION!!!", footer: "Hora de inicio de despliegue: ${HORA_DESPLIEGUE} ", link: env.BUILD_URL, result: currentBuild.currentResult, title: "Deploy Api-habilitaciones (PRODUCCION)", webhookURL: "https://discord.com/api/webhooks/1173648912838561922/iB8YUryvKbcj66EWQa2e6161BDuygkfaMx57VUalxPnDAMvoRHcYKxJTaxV4nfBEdoxi"
+
+            }
+
+            
+
+        }
 
 
    }
