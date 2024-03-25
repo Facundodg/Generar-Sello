@@ -166,7 +166,7 @@ agent any
 
                 }
 
-                checkout scmGit(branches: [[name: 'master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${directorioTrabajo}"]], userRemoteConfigs: [[credentialsId: "${GITHUB_CREDENCIALES_DEPLOY}", url: "${GITHUB_MANIFEST_URL}"]])
+                checkout scmGit(branches: [[name: 'master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${directorioTrabajo}/manifest"]], userRemoteConfigs: [[credentialsId: "${GITHUB_CREDENCIALES_DEPLOY}", url: "${GITHUB_MANIFEST_URL}"]])
 
             }
 
@@ -203,7 +203,7 @@ agent any
                 }
 
 
-                dir ("${CARPETA_DESPLIEGUE}"){
+                dir ("${directorioTrabajo}/manifest"){
 
                     //docker-compose up -d --build --env TAG=003
                     //image: api_habilitacion:${TAG}
