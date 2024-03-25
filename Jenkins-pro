@@ -157,7 +157,7 @@ agent any
 
                 script {
 
-                    sh "${DIRECCION_DESPLIEGUE}"
+                    sh "ls ${DIRECCION_DESPLIEGUE}"
 
                     sh "echo hola"
 
@@ -168,7 +168,7 @@ agent any
 
                 }
 
-                checkout scmGit(branches: [[name: 'master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${directorioTrabajo}/manifest"]], userRemoteConfigs: [[credentialsId: "${GITHUB_CREDENCIALES_DEPLOY}", url: "${GITHUB_MANIFEST_URL}"]])
+                checkout scmGit(branches: [[name: 'master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${DIRECCION_DESPLIEGUE}"]], userRemoteConfigs: [[credentialsId: "${GITHUB_CREDENCIALES_DEPLOY}", url: "${GITHUB_MANIFEST_URL}"]])
 
             }
 
