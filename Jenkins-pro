@@ -5,12 +5,15 @@ def RAMA_PARA_CLONAR
 
 pipeline {
 
+agent any
+
+/*
 agent {
     docker {
       image 'pdmlab/jenkins-node-docker-agent:6.11.1'
     }
   }
-
+*/
     /*
 
         --HERRAMIENTAS--
