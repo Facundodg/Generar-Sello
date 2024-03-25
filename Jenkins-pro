@@ -5,7 +5,11 @@ def RAMA_PARA_CLONAR
 
 pipeline {
 
-agent any
+agent {
+    docker {
+      image 'pdmlab/jenkins-node-docker-agent:6.11.1'
+    }
+  }
 
     /*
 
@@ -211,7 +215,7 @@ agent any
 
                         //sh "ls ${CARPETA_DESPLIEGUE}/habilitacion"
                         //sh "docker compose up --env TAG=${TAG}"
-                        sh "docker compose up"
+                        sh "docker compose up --env TAG=${TAG}"
                     }
 
                 }
