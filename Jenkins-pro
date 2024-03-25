@@ -201,13 +201,15 @@ agent any
 
                     }
 
+                    dir ("${DIRECCION_DESPLIEGUE}"){
+
                     //docker-compose up -d --build --env TAG=003
                     //image: api_habilitacion:${TAG}
 
-                        sh "ls ${CARPETA_DESPLIEGUE}/habilitacion"
+                        //sh "ls ${CARPETA_DESPLIEGUE}/habilitacion"
                         sh "docker compose up -d --build --env TAG=${TAG}"
 
-
+                    }
 
                 }
 
