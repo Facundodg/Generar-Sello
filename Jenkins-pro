@@ -148,7 +148,7 @@ agent any
             environment {
 
                 CARPETA_MANIFIESTO = "${RAMA_PARA_CLONAR == 'Dev-prueba2' ? 'prod' : 'Dev-prueba2'}"
-                DIRECCION_DESPLIEGUE = "${WORKSPACE}/${CARPETA_DESPLIEGUE}"
+                DIRECCION_DESPLIEGUE = "${WORKSPACE}/${CARPETA_DESPLIEGUE}/habilitacion"
 
             }
 
