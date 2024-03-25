@@ -159,8 +159,6 @@ agent any
 
                     sh "ls ${DIRECCION_DESPLIEGUE}"
 
-                    sh "echo hola"
-
                     def directorioTrabajo = env.WORKSPACE
 
                     sh "ls ${directorioTrabajo}"
@@ -168,7 +166,12 @@ agent any
 
                 }
 
-                checkout scmGit(branches: [[name: 'master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${DIRECCION_DESPLIEGUE}"]], userRemoteConfigs: [[credentialsId: "${GITHUB_CREDENCIALES_DEPLOY}", url: "${GITHUB_MANIFEST_URL}"]])
+                dir ("manifest"){
+
+                    checkout scmGit(branches: [[name: 'master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${DIRECCION_DESPLIEGUE}/manifest"]], userRemoteConfigs: [[credentialsId: "${GITHUB_CREDENCIALES_DEPLOY}", url: "${GITHUB_MANIFEST_URL}"]])
+
+                }
+
 
             }
 
@@ -191,7 +194,7 @@ agent any
 
                 script {
 
-                    dir ("${DIRECCION_DESPLIEGUE}"){
+                    dir ("${DIRECCION_DESPLIEGUE}/manifest"){
                         // Verifica si existe un archivo Dockerfile en la subcarpeta actual
                         if (!fileExists("Dockerfile")) {
                             error "Dockerfile not found"
