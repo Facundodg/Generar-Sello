@@ -154,7 +154,7 @@ agent any
 
                 script {
 
-                    sh "ls ${WORKSPACE}/${CARPETA_DESPLIEGUE}"
+                    sh "ls ${WORKSPACE}"
 
                 }
 
