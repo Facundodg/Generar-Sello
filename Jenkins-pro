@@ -205,7 +205,7 @@ agent any
                 }
 
 
-                dir ("${directorioTrabajo}/manifest"){
+                dir ("${DIRECCION_DESPLIEGUE}"){
 
                     //docker-compose up -d --build --env TAG=003
                     //image: api_habilitacion:${TAG}
