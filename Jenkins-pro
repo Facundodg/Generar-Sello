@@ -157,6 +157,8 @@ agent any
 
                 script {
 
+                    sh "${DIRECCION_DESPLIEGUE}"
+
                     sh "echo hola"
 
                     def directorioTrabajo = env.WORKSPACE
