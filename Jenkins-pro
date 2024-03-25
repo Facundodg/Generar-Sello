@@ -194,7 +194,7 @@ agent any
                     //docker-compose up -d --build --env TAG=003
                     //image: api_habilitacion:${TAG}
 
-                        sh "ls ${CARPETA_DESPLIEGUE}/${CARPETA_MANIFIESTO}/habilitacion"
+                        sh "ls ${CARPETA_DESPLIEGUE}/habilitacion"
                         sh "docker compose up -d --build --env TAG=${TAG}"
 
 
