@@ -194,11 +194,11 @@ agent any
 
                 script {
 
-                    dir ("${CARPETA_DESPLIEGUE}S"){
+                    dir ("${CARPETA_DESPLIEGUE}"){
                         // Verifica si existe un archivo Dockerfile en la subcarpeta actual
-                        if (!fileExists("Dockerfile")) {
-                            error "Dockerfile not found"
-                        }
+                        //if (!fileExists("Dockerfile")) {
+                          //  error "Dockerfile not found"
+                        //}
 
                         sh "docker build -t ${IDENTIFICADOR_IMAGEN}:${TAG} ."
 
