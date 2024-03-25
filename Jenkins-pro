@@ -207,7 +207,7 @@ agent {
 
                     dir ("${CARPETA_APLICACION}"){
 
-                        sh "docker build -t ${IDENTIFICADOR_IMAGEN}:${TAG} ."
+                        sh "docker-build -t ${IDENTIFICADOR_IMAGEN}:${TAG} ."
 
                     }
 
