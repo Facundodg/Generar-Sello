@@ -54,7 +54,7 @@ agent any
 
         //--CARPETAS--
         CARPETA_APLICACION = './'
-        CARPETA_DESPLIEGUE = 'manifest/habilitacion'
+        CARPETA_DESPLIEGUE = 'manifest/habilitacion/habilitacion'
 
         TAG = 004
 
