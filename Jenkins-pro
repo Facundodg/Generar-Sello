@@ -38,8 +38,8 @@ agent any
         //--CREDENCIALES DE GIT--
         GITHUB_DESPLIEGUE_URL = "https://github.com/Facundodg/Generar-Sello.git"
         GITHUB_MANIFEST_URL = "https://github.com/dim-desarrollo/manifest"
-        GITHUB_CREDENCIALES = "github"
-        GITHUB_CREDENCIALES_DEPLOY = "github"
+        GITHUB_CREDENCIALES = "github-test-1"
+        GITHUB_CREDENCIALES_DEPLOY = "github-test-1"
 
 
         //--CREDENCIALES DE DOCKERHUB--
