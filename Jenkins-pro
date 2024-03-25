@@ -125,7 +125,7 @@ agent {
 
 
                     DOCKER_VERSION = sh(returnStdout: true, script: 'docker version').trim()
-                    DOCKER_COMPOSE_VERSION = sh(returnStdout: true, script: 'docker compose version').trim()
+                    //DOCKER_COMPOSE_VERSION = sh(returnStdout: true, script: 'docker compose version').trim()
                     JAVA_VERSION = sh(returnStdout: true, script: 'java -version').trim()
                     MAVEN_VERSION = sh(returnStdout: true, script: 'mvn -v').trim()
 
