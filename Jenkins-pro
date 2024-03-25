@@ -207,7 +207,7 @@ agent {
 
                     dir ("${CARPETA_APLICACION}"){
 
-                        sh "docker-build -t ${IDENTIFICADOR_IMAGEN}:${TAG} ."
+                        sh "docker build -t ${IDENTIFICADOR_IMAGEN}:${TAG} ."
 
                     }
 
@@ -218,7 +218,7 @@ agent {
 
                         //sh "ls ${CARPETA_DESPLIEGUE}/habilitacion"
                         //sh "docker compose up --env TAG=${TAG}"
-                        sh "docker compose up --env TAG=${TAG}"
+                        sh "docker-compose up --env TAG=${TAG}"
                     }
 
                 }
