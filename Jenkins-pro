@@ -54,7 +54,7 @@ agent any
 
         //--CARPETAS--
         CARPETA_APLICACION = './'
-        CARPETA_DESPLIEGUE = 'manifest'
+        CARPETA_DESPLIEGUE = './manifest'
 
         TAG = 004
 
@@ -153,9 +153,9 @@ agent any
     stage('Build and run') {
 
         environment{
-             PUERTO_INTERNO = 5050 //modifique 
-             NOMBRE_CONTENEDOR = "api_habilitacion" //modifique 
-             IDENTIFICADOR_IMAGEN = "api_habilitacion" //modifique 
+             PUERTO_INTERNO = 5050
+             NOMBRE_CONTENEDOR = "api_habilitacion" 
+             IDENTIFICADOR_IMAGEN = "api_habilitacion"
          }
 
          
@@ -180,16 +180,12 @@ agent any
 
             dir ("${CARPETA_DESPLIEGUE}"){
 
-                withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENCIALES}", usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-
-
                 //docker-compose up -d --build --env TAG=003
                 //image: api_habilitacion:${TAG}
 
-                    sh "cd ${DIRECCION_DESPLIEGUE}/${CARPETA_MANIFIESTO}/habilitacion"
-                    sh "docker compose up -d --build --env TAG=${TAG}
+                    sh "ls ${DIRECCION_DESPLIEGUE}/${CARPETA_MANIFIESTO}/habilitacion"
+                    sh "docker compose up -d --build --env TAG=${TAG}"
 
-                }
 
             }
 
@@ -197,6 +193,13 @@ agent any
 
 
      }
+
+
+    stage('Build and run') {
+
+
+
+    }
 
  
     stage('Message finish deploy') {
