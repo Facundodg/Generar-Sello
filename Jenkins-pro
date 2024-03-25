@@ -191,7 +191,7 @@ agent any
 
                 script {
 
-                    dir ("${CARPETA_APLICACION}"){
+                    dir ("${DIRECCION_DESPLIEGUE}"){
                         // Verifica si existe un archivo Dockerfile en la subcarpeta actual
                         if (!fileExists("Dockerfile")) {
                             error "Dockerfile not found"
