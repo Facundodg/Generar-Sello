@@ -54,7 +54,7 @@ agent any
 
         //--CARPETAS--
         CARPETA_APLICACION = './'
-        CARPETA_DESPLIEGUE = 'manifest'
+        CARPETA_DESPLIEGUE = 'manifest/habilitacion'
 
         TAG = 004
 
@@ -147,8 +147,8 @@ agent any
 
             environment {
 
-                CARPETA_MANIFIESTO = "${RAMA_PARA_CLONAR == 'Dev-prueba2' ? 'prod' : 'Dev-prueba2'}"
-                DIRECCION_DESPLIEGUE = "${WORKSPACE}/${CARPETA_DESPLIEGUE}/habilitacion"
+                //CARPETA_MANIFIESTO = "${RAMA_PARA_CLONAR == 'Dev-prueba2' ? 'prod' : 'Dev-prueba2'}"
+                DIRECCION_DESPLIEGUE = "${WORKSPACE}/${CARPETA_DESPLIEGUE}"
 
             }
 
