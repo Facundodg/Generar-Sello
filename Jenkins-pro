@@ -187,6 +187,8 @@ agent any
                 PUERTO_INTERNO = 5050
                 NOMBRE_CONTENEDOR = "api_habilitacion" 
                 IDENTIFICADOR_IMAGEN = "api_habilitacion"
+                DIRECCION_DESPLIEGUE = "${WORKSPACE}/${CARPETA_DESPLIEGUE}"
+
 
             }
 
