@@ -154,7 +154,10 @@ agent any
 
                 script {
 
-                    sh "ls ${WORKSPACE}"
+                    def directorioTrabajo = env.WORKSPACE
+
+                    sh "ls ${directorioTrabajo}"
+                    
 
                 }
 
@@ -215,8 +218,6 @@ agent any
 
 
             steps {
-
-                sh "echo ${HORA_DESPLIEGUE}"
 
                 discordSend description: "Deploy de estaciones echo en PRODUCCION!!!", footer: "Hora de inicio de despliegue: ${HORA_DESPLIEGUE} ", link: env.BUILD_URL, result: currentBuild.currentResult, title: "Deploy Api-habilitaciones (PRODUCCION)", webhookURL: "https://discord.com/api/webhooks/1173648912838561922/iB8YUryvKbcj66EWQa2e6161BDuygkfaMx57VUalxPnDAMvoRHcYKxJTaxV4nfBEdoxi"
 
