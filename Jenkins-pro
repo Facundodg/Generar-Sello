@@ -219,7 +219,7 @@ agent {
                         //sh "ls ${CARPETA_DESPLIEGUE}/habilitacion"
                         //sh "docker compose up --env TAG=${TAG}"
                         sh "docker compose --version"
-                        sh "docker compose up"
+                        sh "docker compose up --env TAG=${TAG}"
                     }
 
                 }
