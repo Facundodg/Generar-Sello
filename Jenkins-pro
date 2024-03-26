@@ -218,6 +218,13 @@ agent {
 
                         //sh "ls ${CARPETA_DESPLIEGUE}/habilitacion"
                         //sh "docker compose up --env TAG=${TAG}"
+
+                        sh "curl -fsSL get.docker.com -o get-docker.sh"
+                        sh "sh get-docker.sh"
+                        sh "curl -L https://github.com/docker/compose/releases/download/1.17.0/docker-compose-uname -s-uname -m -o /usr/local/bin/docker-compose"
+                        sh "chmod +x /usr/local/bin/docker-compose usermod -aG docker $YOUR_USER"
+                        sh "systemctl enable docker"
+
                         sh "docker compose --version"
                         sh "docker compose up --env TAG=${TAG}"
                     }
