@@ -5,11 +5,9 @@ def RAMA_PARA_CLONAR
 
 pipeline {
 
-agent {
-    docker {
-        image 'docker/compose:latest' // Utiliza una imagen de Docker que ya tenga Docker Compose instalado
-    }
-}
+agent any
+
+
     /*
 
         --HERRAMIENTAS--
@@ -209,7 +207,7 @@ agent {
 
                     dir ("${DIRECCION_DESPLIEGUE}"){
 
-                    sh 'docker run --entrypoint="" docker/compose:latest --version'
+                    //sh 'docker run --entrypoint="" docker/compose:latest --version'
 
 
                     // Verificar la instalación
