@@ -219,6 +219,10 @@ agent {
                         //sh "ls ${CARPETA_DESPLIEGUE}/habilitacion"
                         //sh "docker compose up --env TAG=${TAG}"
 
+                        sh "ls -ld /var/lib/apt/lists/partial"
+                        sh "sudo mkdir -p /var/lib/apt/lists/partial"
+                        sh "sudo chown root:root /var/lib/apt/lists/partial"
+                        sh "sudo chmod 755 /var/lib/apt/lists/partial"
                         sh "apt-get update"
                         sh "apt-get install docker-compose-plugin"
                         sh "yum update"
