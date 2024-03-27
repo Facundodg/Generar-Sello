@@ -229,7 +229,7 @@ agent {
                     sh 'export PATH=$HOME/bin:$PATH'
                     
                     // Verificar la instalación
-                    sh 'docker compose --version'
+                    sh 'docker compose version'
 
                     // Verificar la instalación
                     sh 'docker version'
