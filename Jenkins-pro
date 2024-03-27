@@ -213,23 +213,6 @@ agent {
 
                     dir ("${DIRECCION_DESPLIEGUE}"){
 
-                    // Crear el directorio bin si no existe
-                    sh 'mkdir -p $HOME/bin'
-                    
-                    // Descargar Docker Compose en el directorio de trabajo
-                    sh 'curl -L "https://github.com/docker/compose/releases/download/2.24.5/docker-compose-Linux-x86_64" -o docker-compose'
-                    
-                    // Dar permisos de ejecución al archivo
-                    sh 'chmod +x docker-compose'
-                    
-                    // Mover Docker Compose al directorio bin
-                    sh 'mv docker-compose $HOME/bin/'
-                    
-                    // Asegurarse de que el directorio bin esté en el PATH
-                    sh 'export PATH=$HOME/bin:$PATH'
-
-                    sh 'ls -l /var/jenkins_home/bin/docker-compose'
-
                     // Verificar la instalación
                     sh 'docker compose version' // no esta andando 
 
