@@ -213,20 +213,18 @@ agent {
 
                     dir ("${DIRECCION_DESPLIEGUE}"){
 
-                    //docker-compose up -d --build --env TAG=003
-                    //image: api_habilitacion:${TAG}
-
-                        //sh "ls ${CARPETA_DESPLIEGUE}/habilitacion"
-                        //sh "docker compose up --env TAG=${TAG}"
-
-                    // Descargar Docker Compose
-                    sh 'curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose'
+                    // Descargar Docker Compose en el directorio de trabajo
+                    sh 'curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64" -o docker-compose'
+                    
+                    // Mover Docker Compose a /usr/local/bin
+                    sh 'sudo mv docker-compose /usr/local/bin/'
                     
                     // Dar permisos de ejecución
-                    sh 'chmod +x /usr/local/bin/docker-compose'
+                    sh 'sudo chmod +x /usr/local/bin/docker-compose'
                     
                     // Verificar la instalación
                     sh 'docker-compose --version'
+                    
                     }
 
                 }
