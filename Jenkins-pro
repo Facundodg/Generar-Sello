@@ -216,15 +216,18 @@ agent {
                     // Descargar Docker Compose en el directorio de trabajo
                     sh 'curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64" -o docker-compose'
                     
-                    // Mover Docker Compose a /usr/local/bin
-                    sh 'sudo mv docker-compose /usr/local/bin/'
+                    // Dar permisos de ejecución al archivo
+                    sh 'chmod +x docker-compose'
                     
-                    // Dar permisos de ejecución
-                    sh 'sudo chmod +x /usr/local/bin/docker-compose'
+                    // Mover Docker Compose a un directorio en PATH
+                    sh 'mv docker-compose $HOME/bin/'
+                    
+                    // Asegurarse de que el directorio bin esté en el PATH
+                    sh 'export PATH=$HOME/bin:$PATH'
                     
                     // Verificar la instalación
                     sh 'docker-compose --version'
-                    
+
                     }
 
                 }
