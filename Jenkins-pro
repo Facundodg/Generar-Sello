@@ -219,10 +219,10 @@ agent {
                         //sh "ls ${CARPETA_DESPLIEGUE}/habilitacion"
                         //sh "docker compose up --env TAG=${TAG}"
 
-                        sh "sudo apt-get update"
-                        sh "sudo apt-get install docker-compose-plugin"
-                        sh "sudo yum update"
-                        sh "sudo yum install docker-compose-plugin"
+                        sh "apt-get update"
+                        sh "apt-get install docker-compose-plugin"
+                        sh "yum update"
+                        sh "yum install docker-compose-plugin"
                         sh "docker compose version"
                     }
 
