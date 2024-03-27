@@ -230,10 +230,8 @@ agent {
 
                     sh 'ls -l /var/jenkins_home/bin/docker-compose'
 
-                    sh 'ls -l /var/jenkins_home/bin/docker-compose up'
-                    
                     // Verificar la instalación
-                    sh 'docker compose --version' // no esta andando 
+                    sh 'docker-compose --version' // no esta andando 
 
                     // Verificar la instalación
                     sh 'docker version'
