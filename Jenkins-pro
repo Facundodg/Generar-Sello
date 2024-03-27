@@ -220,13 +220,8 @@ agent {
                         //sh "docker compose up --env TAG=${TAG}"
 
                         //sh "ls -ld /var/lib/apt/lists/partial"
-                        sh "mkdir -p /var/lib/apt/lists/partial"
-                        sh "chown root:root /var/lib/apt/lists/partial"
-                        sh "chmod 755 /var/lib/apt/lists/partial"
-                        sh "apt-get update"
-                        sh "apt-get install docker-compose-plugin"
-                        sh "yum update"
-                        sh "yum install docker-compose-plugin"
+                        sh "curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose"
+                        sh "chmod +x /usr/local/bin/docker-compose"
                         sh "docker compose version"
                     }
 
