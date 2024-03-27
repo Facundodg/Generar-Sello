@@ -209,6 +209,9 @@ agent {
 
                     dir ("${DIRECCION_DESPLIEGUE}"){
 
+                    sh 'docker run --entrypoint="" docker/compose:latest --version'
+
+
                     // Verificar la instalación
                     sh 'docker compose version' // no esta andando 
 
