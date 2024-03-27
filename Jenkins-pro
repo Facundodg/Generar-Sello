@@ -227,6 +227,10 @@ agent {
                     
                     // Asegurarse de que el directorio bin esté en el PATH
                     sh 'export PATH=$HOME/bin:$PATH'
+
+                    sh 'ls -l /var/jenkins_home/bin/docker-compose'
+
+                    sh 'ls -l /var/jenkins_home/bin/docker-compose --version'
                     
                     // Verificar la instalación
                     sh 'docker-compose version' // no esta andando 
