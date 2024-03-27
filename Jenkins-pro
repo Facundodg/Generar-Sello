@@ -26,7 +26,7 @@ agent {
    tools {
         maven "maven3.8.8"
         jdk 'java21'
-        dockerTool 'docker-2'
+        //dockerTool 'docker-2'
     }
 
     environment {
@@ -214,7 +214,7 @@ agent {
                     dir ("${DIRECCION_DESPLIEGUE}"){
 
                     // Verificar la instalación
-                    sh 'docker-compose --version' // no esta andando 
+                    sh 'docker compose version' // no esta andando 
 
                     // Verificar la instalación
                     sh 'docker version'
