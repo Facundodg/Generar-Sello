@@ -5,15 +5,11 @@ def RAMA_PARA_CLONAR
 
 pipeline {
 
-agent any
-
-/*
 agent {
     docker {
-      image 'pdmlab/jenkins-node-docker-agent:6.11.1'
+        image 'docker/compose:latest' // Utiliza una imagen de Docker que ya tenga Docker Compose instalado
     }
-  }
-*/
+}
     /*
 
         --HERRAMIENTAS--
@@ -26,7 +22,7 @@ agent {
    tools {
         maven "maven3.8.8"
         jdk 'java21'
-        //dockerTool 'docker-2'
+        dockerTool 'docker-2'
     }
 
     environment {
@@ -125,7 +121,7 @@ agent {
 
 
                     DOCKER_VERSION = sh(returnStdout: true, script: 'docker version').trim()
-                    DOCKER_COMPOSE_VERSION = sh(returnStdout: true, script: 'docker compose version').trim()
+                    //DOCKER_COMPOSE_VERSION = sh(returnStdout: true, script: 'docker compose version').trim()
                     JAVA_VERSION = sh(returnStdout: true, script: 'java -version').trim()
                     MAVEN_VERSION = sh(returnStdout: true, script: 'mvn -v').trim()
 
