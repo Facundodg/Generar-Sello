@@ -213,13 +213,16 @@ agent {
 
                     dir ("${DIRECCION_DESPLIEGUE}"){
 
+                    // Crear el directorio bin si no existe
+                    sh 'mkdir -p $HOME/bin'
+                    
                     // Descargar Docker Compose en el directorio de trabajo
                     sh 'curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64" -o docker-compose'
                     
                     // Dar permisos de ejecución al archivo
                     sh 'chmod +x docker-compose'
                     
-                    // Mover Docker Compose a un directorio en PATH
+                    // Mover Docker Compose al directorio bin
                     sh 'mv docker-compose $HOME/bin/'
                     
                     // Asegurarse de que el directorio bin esté en el PATH
