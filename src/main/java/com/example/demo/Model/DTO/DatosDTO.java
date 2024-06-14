@@ -29,9 +29,9 @@ public class DatosDTO {
     private Long id_tramite;
     @NotNull(message = "Los Mt2 no pueden ser nulos")
     private double mt2;
-    @NotNull(message = "El padron no puede ser nulo")
-    @Size(min = 5, max = 6, message = "El padron tiene que tener 5 caracteres como minimo y maximo 6")
-    @NotBlank
+    //@NotNull(message = "El padron no puede ser nulo")
+    //@Size(min = 5, max = 6, message = "El padron tiene que tener 5 caracteres como minimo y maximo 6")
+    //@NotBlank
     private String padron;
 
 }
