@@ -38,7 +38,7 @@ agent any
         GITHUB_DESPLIEGUE_URL = "https://github.com/dim-desarrollo/ventanilla-monolito.git"
 
         SONARQUBE_CREDENCIALES = 'sonarqube'
-        PUERTO_EXTERNO = 4002
+        PUERTO_EXTERNO = 5050
 
         CARPETA_APLICACION = './'
 
@@ -79,7 +79,7 @@ agent any
         }
 
     }
-    
+    /*
     stage('SonarQube Analysis') {
         environment {
             SONAR_HOST_IP = sh(script: "docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' sonarqube", returnStdout: true).trim()
@@ -114,6 +114,7 @@ agent any
             }
         }
     }
+*/
            
   stage('Tools initialization') {
       steps {
@@ -159,11 +160,9 @@ agent any
      stage('Build and run') {
 
         environment{
-             PUERTO_INTERNO = 8091
-             NOMBRE_CONTENEDOR = "bk-domicilio-fiscal"
-             IDENTIFICADOR_IMAGEN = "bk-domicilio-fiscal"
-             TAG_IMAGEN = "${env.BUILD_NUMBER}"  // Tag único usando el número de compilación y el ID de la construcción
-
+             PUERTO_INTERNO = 5050 //modifique 
+             NOMBRE_CONTENEDOR = "api_habilitacion" //modifique 
+             IDENTIFICADOR_IMAGEN = "api_habilitacion" //modifique 
          }
           
         steps {
@@ -183,6 +182,7 @@ agent any
                     echo "ID CONTENEDOR: ${contenedorExistente}"
 
                     // Verifica si existe un contenedor con el mismo nombre
+                    /*
                     if (contenedorExistente) {
                         // Si existe el contenedor, pausarlo y luego eliminarlo
                         //sh "echo contenedores existiendo (BORRADOS)"
@@ -191,11 +191,13 @@ agent any
                         
                         sh "docker rm -f $contenedorExistente"
                     }
+                    */
 
                         // Construir la nueva imagen
-                        sh "docker build -t ${IDENTIFICADOR_IMAGEN}:${TAG_IMAGEN} ."
+                        sh "docker build -t ${IDENTIFICADOR_IMAGEN}:120 ."
 
                         // Ejecutar el nuevo contenedor
+                        /*
                         sh """
                             docker run --network estaciones_my-network \
                             -e DATABASE_URL="172.20.255.250" \
@@ -206,6 +208,7 @@ agent any
                             -d -p ${PUERTO_EXTERNO}:${PUERTO_INTERNO} \
                             --name ${NOMBRE_CONTENEDOR} ${IDENTIFICADOR_IMAGEN}:${TAG_IMAGEN}
                         """
+                        */
                 }
 
             }
@@ -213,7 +216,7 @@ agent any
           
      }
 
-
+/*
         stage('Login to Nexus Docker Registry') {
 
         environment {
@@ -240,7 +243,8 @@ agent any
         }
 
      }
-
+*/
+/*
     stage("Push Docker Image to Nexus") {
 
         environment{
@@ -264,7 +268,7 @@ agent any
             
         }
     }
-
+*/
        
     stage('Message finish deploy') {
 
