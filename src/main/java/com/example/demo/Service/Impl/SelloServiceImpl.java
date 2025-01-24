@@ -114,7 +114,7 @@ public class SelloServiceImpl implements SelloServicios {
                         , null
                         , "404"
                         , "com.dim.exception.GenericException.ContribuyenteNoCategorizadoEnEsteAnio"
-                        , "El contribuyente no fue categorizado para el año 2024, ultima categorizacion " + String.valueOf(newArray[2]) + ".");
+                        , "El contribuyente no fue categorizado para el año 2025, ultima categorizacion " + String.valueOf(newArray[2]) + ".");
                 return responce;
 
             }
