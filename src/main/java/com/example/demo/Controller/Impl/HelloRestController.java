@@ -10,7 +10,7 @@ public class HelloRestController {
 
     @GetMapping("user")
     public String helloUser() {
-        return "Hello User";
+        return "Hello User gg";
     }
 
     @GetMapping("admin")
