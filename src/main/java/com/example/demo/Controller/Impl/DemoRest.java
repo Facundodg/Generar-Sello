@@ -41,7 +41,7 @@ public class DemoRest {
     logger.info("Esta autenticado {}", auth.isAuthenticated());
 
     Map<String, String> mensaje = new HashMap<>();
-    mensaje.put("contenido", "Hola Peru");
+    mensaje.put("contenido", "Hola Peru prueba");
     return ResponseEntity.ok(mensaje);
   }
 
